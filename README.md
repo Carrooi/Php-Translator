@@ -1,6 +1,7 @@
 # translator
 
 PHP translator with plural forms support.
+Can be also used with Nette.
 
 This library is compatible with node package [translator](https://npmjs.org/package/translator).
 
@@ -39,7 +40,7 @@ This is the most simple example of dictionary (and most stupid). Again these tra
 When you have got your dictionaries, you can setup translator and start using it.
 
 ```
-$translator = new Translator('/app/lang');
+$translator = new \DK\Translator\Translator('/app/lang');
 $translator->setLanguage('en');
 
 $message = $translator->translate('homepage.promo.box.text');		// output: and some really long text
@@ -193,4 +194,10 @@ Usage:
 
 ```
 $messages = $translator->translate('dictionary.fruits', 6);		// output: array(6 oranges, 6 bananas)
+```
+
+## With Nette
+
+```
+new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 ```
