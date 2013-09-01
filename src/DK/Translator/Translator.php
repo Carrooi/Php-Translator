@@ -217,6 +217,35 @@ class Translator
 
 	/**
 	 * @param string $message
+	 * @param string $key
+	 * @param string $value
+	 * @param int|null $count
+	 * @param array $args
+	 * @return array
+	 * @throws \Exception
+	 */
+	public function translatePairs($message, $key, $value, $count = null, array $args = array())
+	{
+		$key = "$message.$key";
+		$value = "$message.$value";
+
+		$key = $this->translate($key, $count, $args);
+		$value = $this->translate($value, $count, $args);
+
+		if (!is_array($key) || !is_array($value)) {
+			throw new \Exception('Translations are not arrays.');
+		}
+
+		if (count($key) !== count($value)) {
+			throw new \Exception('Keys and values translations have not got the same length.');
+		}
+
+		return array_combine($key, $value);
+	}
+
+
+	/**
+	 * @param string $message
 	 * @param array $translation
 	 * @param int|null $count
 	 * @return array|string

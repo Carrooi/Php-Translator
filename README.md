@@ -196,8 +196,48 @@ Usage:
 $messages = $translator->translate('dictionary.fruits', 6);		// output: array(6 oranges, 6 bananas)
 ```
 
+## List of pairs
+
+If you have got one list of for example titles or headlines and other list with texts for these titles, you can let this
+translator to automatically combine these two lists together into associative array.
+
+Dictionary:
+
+```
+{
+	"titles": [
+		["first"],
+		["second"]
+	],
+	"texts": [
+		["text for first title"]
+		["text for second title"]
+	]
+}
+```
+
+Usage:
+
+```
+$translator->translatePairs('dictionary', 'titles', 'texts');
+```
+
+Output:
+
+```
+[
+	'first' => 'text for first title',
+	'second' => 'text for second title'
+]
+```
+
 ## With Nette
 
 ```
 new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 ```
+
+## Changelog
+
+* 1.2.0
+	+ Added translatePairs method
