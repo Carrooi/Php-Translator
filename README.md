@@ -194,8 +194,3 @@ Usage:
 ```
 $messages = $translator->translate('dictionary.fruits', 6);		// output: array(6 oranges, 6 bananas)
 ```
-
-## Changelog
-
-* 1.0.0
-	+ Initial version (from node version)
