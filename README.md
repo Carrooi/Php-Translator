@@ -123,7 +123,6 @@ Usage:
 
 ```
 $translator->addReplacement('site', 'my-site-name.com');
-
 $message = $translator->translate('dictionary.info');		// output: web site name: my-site-name.com
 ```
 
