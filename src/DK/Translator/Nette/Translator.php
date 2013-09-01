@@ -2,7 +2,7 @@
 
 namespace DK\Translator\Nette;
 
-if (!class_exists('Nette\Localization\ITranslator')) {
+if (!interface_exists('Nette\Localization\ITranslator')) {
 	throw new \Exception('Nette was not found');
 }
 
