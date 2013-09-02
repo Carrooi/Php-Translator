@@ -199,9 +199,14 @@ class Translator
 			return $message;
 		}
 
+		if ($count !== null) {
+			$args['count'] = $count;
+		}
+
 		if (preg_match('~^\:(.*)\:$~', $message, $match) !== 0) {
 			$message = $message[1];
 		} else {
+			$message = $this->applyReplacements($message, $args);
 			$translation = $this->findTranslation($message);
 
 			if ($translation !== null) {
@@ -209,7 +214,7 @@ class Translator
 			}
 		}
 
-		$message = $this->prepareTranslation($message, $count, $args);
+		$message = $this->prepareTranslation($message, $args);
 
 		return $message;
 	}
@@ -287,34 +292,42 @@ class Translator
 
 	/**
 	 * @param string|array $message
-	 * @param int|null $count
 	 * @param array $args
 	 * @return array|string
 	 */
-	private function prepareTranslation($message, $count = null, array $args = array())
+	private function prepareTranslation($message, array $args = array())
 	{
 		if (is_string($message)) {
-			$replacements = $this->replacements;
-
-			if ($count !== null) {
-				$args['count'] = $count;
-			}
-
-			foreach ($args as $name => $value) {
-				$replacements[$name] = $value;
-			}
-
-			foreach ($replacements as $name => $value) {
-				if ($value !== false) {
-					$message = preg_replace('~%'. $name. '%~', $value, $message);
-				}
-			}
+			$message = $this->applyReplacements($message);
 		} else {
 			$result = array();
 			foreach ($message as $m) {
-				$result[] = $this->prepareTranslation($m, $count, $args);
+				$result[] = $this->prepareTranslation($m, $args);
 			}
 			$message = $result;
+		}
+
+		return $message;
+	}
+
+
+	/**
+	 * @param string $message
+	 * @param array $args
+	 * @return string
+	 */
+	private function applyReplacements($message, array $args = array())
+	{
+		$replacements = $this->replacements;
+
+		foreach ($args as $name => $value) {
+			$replacements[$name] = $value;
+		}
+
+		foreach ($replacements as $name => $value) {
+			if ($value !== false) {
+				$message = preg_replace('~%'. $name. '%~', $value, $message);
+			}
 		}
 
 		return $message;

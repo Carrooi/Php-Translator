@@ -145,6 +145,35 @@ $message = $translator->translate('dictionary.info', null, array(		// output: di
 ));
 ```
 
+### In names of translations
+
+These replacements can be used also in message names. This is quite useful when you have got for example different user
+roles with different translations. Then you can set replacement with name `role` and save these translations into
+different directories.
+
+en.admin.json:
+
+```
+{
+	"title": "Page for admin"
+}
+```
+
+en.normal.json:
+
+```
+{
+	"title": "Page for normal user"
+}
+```
+
+Usage:
+
+```
+$translator->addReplacement('role', $user->getRole());
+$translator->translate('admin.%role%');
+```
+
 ## List of translations
 
 Sometimes you may want to display list of texts but don't want to create translations with these names: item1, item2,
@@ -238,6 +267,9 @@ new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 ```
 
 ## Changelog
+
+* 1.2.1
+	+ Replacements in messages
 
 * 1.2.0
 	+ Added translatePairs method
