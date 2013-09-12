@@ -298,7 +298,7 @@ class Translator
 	private function prepareTranslation($message, array $args = array())
 	{
 		if (is_string($message)) {
-			$message = $this->applyReplacements($message);
+			$message = $this->applyReplacements($message, $args);
 		} else {
 			$result = array();
 			foreach ($message as $m) {
