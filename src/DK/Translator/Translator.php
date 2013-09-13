@@ -150,15 +150,38 @@ class Translator
 		if (!isset($this->data[$categoryName])) {
 			$name = $path. '/'. $this->language. '.'. $name. '.json';
 			$path = $this->getDirectory(). '/'. $name;
-			if (is_file($path)) {
-				$data = json_decode(file_get_contents($path), true);
-				$this->data[$categoryName] = $this->normalizeTranslations($data);
-			} else {
-				return array();
-			}
+			$this->data[$categoryName] = $this->load($path, $categoryName);
 		}
 
 		return $this->data[$categoryName];
+	}
+
+
+	/**
+	 * @param string $path
+	 * @param string $categoryName
+	 * @return array
+	 */
+	private function load($path, $categoryName)
+	{
+		$data = $this->loadFromFile($path);
+		return $this->normalizeTranslations($data);
+	}
+
+
+	/**
+	 * @param string $path
+	 * @return array
+	 */
+	private function loadFromFile($path)
+	{
+		if (is_file($path)) {
+			$data = json_decode(file_get_contents($path), true);
+		} else {
+			$data = array();
+		}
+
+		return $data;
 	}
 
 
