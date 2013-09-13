@@ -268,6 +268,9 @@ new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 
 ## Changelog
 
+* 1.3.0
+
+
 * 1.2.2
 	+ Optimized plural forms
 	+ Replacements were not applied to messages (huge bug, sorry)

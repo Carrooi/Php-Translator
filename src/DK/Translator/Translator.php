@@ -41,6 +41,16 @@ class Translator
 
 
 	/**
+	 * @return $this
+	 */
+	public function invalidate()
+	{
+		$this->data = array();
+		return $this;
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getDirectory()
