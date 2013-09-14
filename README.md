@@ -269,7 +269,7 @@ new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 ## Changelog
 
 * 1.3.0
-
+	+ Added tests
 
 * 1.2.2
 	+ Optimized plural forms
