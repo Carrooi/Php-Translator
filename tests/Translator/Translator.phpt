@@ -75,6 +75,7 @@ class TranslatorTest extends TestCase
 		Assert::same(array('3 bananas', '3 citrons', '3 oranges'), $t);
 	}
 
+
 	public function testTranslate_replacementInMessage()
 	{
 		$this->translator->addReplacement('one', 1);
@@ -85,6 +86,7 @@ class TranslatorTest extends TestCase
 		));
 		Assert::same('1 2', $t);
 	}
+
 
 	public function testTranslatePairs()
 	{
@@ -97,12 +99,14 @@ class TranslatorTest extends TestCase
 		), $t);
 	}
 
+
 	public function testTranslatePairs_notArrays()
 	{
 		Assert::exception(function() {
 			$this->translator->translatePairs('web.pages.homepage.promo', 'title', 'list');
 		}, 'Exception');
 	}
+
 
 	public function testTranslatePairs_differentLength()
 	{
