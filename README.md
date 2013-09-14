@@ -225,6 +225,20 @@ Usage:
 $messages = $translator->translate('dictionary.fruits', 6);		// output: array(6 oranges, 6 bananas)
 ```
 
+### Shorter syntax
+
+If your list contains just singular forms translations, you can use shorter syntax for it.
+
+```
+{
+	"-- myList": [
+		"first item",
+		"second item",
+		"third item"
+	]
+}
+```
+
 ## List of pairs
 
 If you have got one list of for example titles or headlines and other list with texts for these titles, you can let this
@@ -270,6 +284,7 @@ new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 
 * 1.3.0
 	+ Added tests
+	+ Added shorter syntax for writing lists
 
 * 1.2.2
 	+ Optimized plural forms

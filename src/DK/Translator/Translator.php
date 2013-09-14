@@ -193,9 +193,27 @@ class Translator
 	{
 		$result = array();
 		foreach ($translations as $name => $translation) {
+			$list = false;
+			if (preg_match('~^--\s(.*)~', $name, $match)) {
+				$name = $match[1];
+				$list = true;
+			}
 			if (is_string($translation)) {
 				$result[$name] = [$translation];
-			} else {
+			} elseif (is_array($translation)) {
+				$result[$name] = array();
+				foreach ($translation as $t) {
+					if (is_array($t)) {
+						$result[$name][] = $t;
+					} else {
+						if ($list === true && !is_array($t)) {
+							$t = array($t);
+							$result[$name][] = $t;
+						}
+					}
+				}
+
+
 				$result[$name] = $translation;
 			}
 		}
