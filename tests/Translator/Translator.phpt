@@ -62,6 +62,13 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testTranslate_shorterList()
+	{
+		$t = $this->translator->translate('web.pages.homepage.promo.newList');
+		Assert::same(array('first', 'second', 'third'), $t);
+	}
+
+
 	public function testTranslate_plurals()
 	{
 		$t = $this->translator->translate('web.pages.homepage.promo.cars', 3);
