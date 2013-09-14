@@ -305,16 +305,13 @@ Or with lists:
 }
 ```
 
-## With Nette
-
-
-
 ## Changelog
 
 * 1.3.0
 	+ Added tests
 	+ Added shorter syntax for writing lists
 	+ Added support for comments
+	+ Removed Nette support (will be in another package)
 
 * 1.2.2
 	+ Optimized plural forms

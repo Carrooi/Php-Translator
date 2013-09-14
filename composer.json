@@ -2,7 +2,7 @@
     "name": "sakren/translator",
 	"type": "library",
 	"description": "Translator for PHP",
-	"keywords": ["translator", "localization", "i18n", "nette"],
+	"keywords": ["translator", "localization", "i18n"],
 	"homepage": "https://github.com/sakren/php-translator",
 	"license": "MIT",
 	"authors": [
