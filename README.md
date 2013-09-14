@@ -1,9 +1,16 @@
 # translator
 
 PHP translator with plural forms support.
-Can be also used with Nette.
 
 This library is compatible with node package [translator](https://npmjs.org/package/translator).
+
+## Installation
+
+Preferred way is to install via [composer](http://getcomposer.org/).
+
+```
+php composer.phar require sakren/translator
+```
 
 ## Dictionary files
 
@@ -305,7 +312,15 @@ Or with lists:
 }
 ```
 
+## With Nette framework
+
+If you want to use this translator with nette, please use [sakren/nette-translator](https://github.com/sakren/nette-translator)
+library.
+
 ## Changelog
+
+* 1.3.1
+	+ Added some information
 
 * 1.3.0
 	+ Added tests
