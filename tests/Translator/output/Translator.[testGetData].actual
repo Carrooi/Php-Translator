@@ -1,0 +1,3 @@
+array(
+	'web/pages/homepage/simple' => array('title' => array('Title of promo box')),
+)

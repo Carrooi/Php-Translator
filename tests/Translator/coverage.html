@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex,noarchive">
+	<meta name="generator" content="Nette Tester">
+
+	<title>Code coverage</title>
+
+	<style type="text/css">
+	html {
+		font: 16px/1.5 sans-serif;
+		border-top: 4.7em solid #F4EBDB;
+	}
+
+	body {
+		max-width: 990px;
+		margin: -4.7em auto 0;
+		background: white;
+		color: #333;
+	}
+
+	h1 {
+		font-size: 1.9em;
+		margin: .5em 0 1.5em;
+		color: #7A7772;
+		text-shadow: 1px 1px 0 white;
+	}
+
+	div.code {
+		font: 14px/1.2 Consolas, monospace;
+		background: #FDF5CE;
+		padding: .4em .7em;
+		border: 1px dotted silver;
+		overflow-x: auto;
+		display: none;
+	}
+
+	span.line {
+		color: #9F9C7F;
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	.t {
+		background: #99f999;
+	}
+
+	.u {
+		background: #f9ac9e;
+	}
+
+	td {
+		vertical-align: middle;
+	}
+
+	small {
+		color: gray;
+	}
+
+	.number {
+		text-align: right;
+		width: 50px;
+	}
+
+	.bar {
+		border: 1px solid #ACACAC;
+		background: #e50400;
+		width: 35px;
+		height: 1em;
+	}
+
+	.bar div {
+		background: #1A7E1E;
+		height: 1em;
+	}
+
+	.light td {
+		opacity: .5;
+	}
+
+	.light td * {
+		color: gray;
+	}
+
+	.not-loaded td * {
+		color: red;
+	}
+	</style>
+</head>
+
+<body>
+	<h1>Code coverage 100&nbsp;%</h1>
+
+		<div>
+		<table>
+		<tr>
+			<td class="number"><small>100 %</small></td>
+			<td><div class="bar"><div style="width: 100%"></div></div></td>
+			<td><a href="#fragment0" onclick="toggle(this)"><span>Translator.php</span></a></td>
+		</tr>
+		</table>
+
+		<div class="code" id="fragment0">
+		<div><span class='line'>  1:    </span><code><span style="color: #06B">
+<span style="color: #000">&lt;?php<br>
+<span class='line'>  2:    </span><br>
+<span class='line'>  3:    </span></span><span style="color: #D24; font-weight: bold">namespace&nbsp;</span><span style="color: #000">DK</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>  4:    </span><br>
+<span class='line'>  5:    </span></span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>  6:    </span>&nbsp;*<br>
+<span class='line'>  7:    </span>&nbsp;*&nbsp;@author&nbsp;David&nbsp;Kudera<br>
+<span class='line'>  8:    </span>&nbsp;*/<br>
+<span class='line'>  9:    </span></span><span style="color: #D24; font-weight: bold">class&nbsp;</span><span style="color: #000">Translator<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #000"><span class='line'> 10:    </span></span><span style="color: #D24; font-weight: bold">{<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 11:    </span><br>
+<span class='line'> 12:    </span><br>
+<span class='line'> 13:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**&nbsp;@var&nbsp;string&nbsp;*/<br>
+<span class='line'> 14:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;</span><span style="color: #000">$directory</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'> 15:    </span><br>
+<span class='line'> 16:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**&nbsp;@var&nbsp;string&nbsp;*/<br>
+<span class='line'> 17:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;</span><span style="color: #000">$language</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'> 18:    </span><br>
+<span class='line'> 19:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**&nbsp;@var&nbsp;array&nbsp;*/<br>
+<span class='line'> 20:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;</span><span style="color: #000">$plurals&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'> 21:    </span><br>
+<span class='line'> 22:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**&nbsp;@var&nbsp;array&nbsp;&nbsp;*/<br>
+<span class='line'> 23:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;</span><span style="color: #000">$replacements&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'> 24:    </span><br>
+<span class='line'> 25:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**&nbsp;@var&nbsp;array&nbsp;&nbsp;*/<br>
+<span class='line'> 26:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;</span><span style="color: #000">$data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'> 27:    </span><br>
+<span class='line'> 28:    </span><br>
+<span class='line'> 29:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 30:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$directory<br>
+<span class='line'> 31:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'> 32:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">__construct</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$directory</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'> 33:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 34:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">setDirectory</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$directory</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 35:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 36:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$plurals&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">json_decode</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">file_get_contents</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">__DIR__</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">'/pluralForms.json'</span><span style="color: #D24; font-weight: bold">),&nbsp;</span><span style="color: #000">true</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'> 37:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$plurals&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$language&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'> 38:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">addPluralForm</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$language</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'count'</span><span style="color: #D24; font-weight: bold">],&nbsp;</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'form'</span><span style="color: #D24; font-weight: bold">]);<br>
+<span class='line'> 39:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'> 40:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 41:    </span><br>
+<span class='line'> 42:    </span><br>
+<span class='line'> 43:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 44:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;\DK\Translator\Translator<br>
+<span class='line'> 45:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'> 46:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">invalidate</span><span style="color: #D24; font-weight: bold">()<br>
+<span class='line'> 47:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 48:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'> 49:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 50:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 51:    </span><br>
+<span class='line'> 52:    </span><br>
+<span class='line'> 53:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 54:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'> 55:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'> 56:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">getData</span><span style="color: #D24; font-weight: bold">()<br>
+<span class='line'> 57:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 58:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">data</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 59:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 60:    </span><br>
+<span class='line'> 61:    </span><br>
+<span class='line'> 62:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 63:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;string<br>
+<span class='line'> 64:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'> 65:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">getDirectory</span><span style="color: #D24; font-weight: bold">()<br>
+<span class='line'> 66:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 67:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">directory</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 68:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 69:    </span><br>
+<span class='line'> 70:    </span><br>
+<span class='line'> 71:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 72:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$directory<br>
+<span class='line'> 73:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;\DK\Translator\Translator<br>
+<span class='line'> 74:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;\Exception<br>
+<span class='line'> 75:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'> 76:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">setDirectory</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$directory</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'> 77:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 78:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #000">is_dir</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$directory</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'> 79:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">"Directory&nbsp;'</span><span style="color: #000">$directory</span><span style="color: #080">''&nbsp;does&nbsp;not&nbsp;exists."</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 80:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 81:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 82:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">directory&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$directory</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'> 83:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 84:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 85:    </span><br>
+<span class='line'> 86:    </span><br>
+<span class='line'> 87:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 88:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;string<br>
+<span class='line'> 89:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'> 90:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">getLanguage</span><span style="color: #D24; font-weight: bold">()<br>
+<span class='line'> 91:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 92:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">language</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 93:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'> 94:    </span><br>
+<span class='line'> 95:    </span><br>
+<span class='line'> 96:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'> 97:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$language<br>
+<span class='line'> 98:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;\DK\Translator\Translator<br>
+<span class='line'> 99:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>100:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">setLanguage</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$language</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>101:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>102:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">language&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$language</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>103:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>104:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>105:    </span><br>
+<span class='line'>106:    </span><br>
+<span class='line'>107:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>108:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$language<br>
+<span class='line'>109:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;int&nbsp;$count<br>
+<span class='line'>110:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$form<br>
+<span class='line'>111:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;\DK\Translator\Translator<br>
+<span class='line'>112:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>113:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">addPluralForm</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$language</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$form</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>114:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>115:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">plurals</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$language</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;array(<br>
+<span class='line'>116:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #080">'count'&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">,<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>117:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #080">'form'&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$form<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #000"><span class='line'>118:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>119:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>120:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>121:    </span><br>
+<span class='line'>122:    </span><br>
+<span class='line'>123:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>124:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>125:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>126:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">getPluralForms</span><span style="color: #D24; font-weight: bold">()<br>
+<span class='line'>127:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>128:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">plurals</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>129:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>130:    </span><br>
+<span class='line'>131:    </span><br>
+<span class='line'>132:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>133:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$search<br>
+<span class='line'>134:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$replacement<br>
+<span class='line'>135:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;\DK\Translator\Translator<br>
+<span class='line'>136:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>137:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">addReplacement</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$search</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$replacement</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>138:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>139:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">replacements</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$search</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;</span><span style="color: #000">$replacement</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>140:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>141:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>142:    </span><br>
+<span class='line'>143:    </span><br>
+<span class='line'>144:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>145:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$search<br>
+<span class='line'>146:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;\DK\Translator\Translator<br>
+<span class='line'>147:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;\Exception<br>
+<span class='line'>148:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>149:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">removeReplacement</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$search</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>150:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>151:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">replacements</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$search</span><span style="color: #D24; font-weight: bold">]))&nbsp;{<br>
+<span class='line'>152:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">"Replacement&nbsp;'</span><span style="color: #000">$search</span><span style="color: #080">'&nbsp;was&nbsp;not&nbsp;found."</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>153:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>154:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>155:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">replacements</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$search</span><span style="color: #D24; font-weight: bold">]);<br>
+<span class='line'>156:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>157:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>158:    </span><br>
+<span class='line'>159:    </span><br>
+<span class='line'>160:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>161:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>162:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>163:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">getReplacements</span><span style="color: #D24; font-weight: bold">()<br>
+<span class='line'>164:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>165:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">replacements</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>166:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>167:    </span><br>
+<span class='line'>168:    </span><br>
+<span class='line'>169:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>170:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$path<br>
+<span class='line'>171:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$name<br>
+<span class='line'>172:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>173:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>174:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">loadCategory</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>175:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>176:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$categoryName&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">'/'</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>177:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">]))&nbsp;{<br>
+<span class='line'>178:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$name&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">'/'</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">language</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">'.'</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">'.json'</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>179:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$path&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">getDirectory</span><span style="color: #D24; font-weight: bold">().&nbsp;</span><span style="color: #080">'/'</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>180:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">load</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>181:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>182:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>183:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">];<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>184:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>185:    </span><br>
+<span class='line'>186:    </span><br>
+<span class='line'>187:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>188:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$path<br>
+<span class='line'>189:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$categoryName<br>
+<span class='line'>190:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>191:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>192:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">load</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>193:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>194:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">loadFromFile</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>195:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">normalizeTranslations</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>196:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>197:    </span><br>
+<span class='line'>198:    </span><br>
+<span class='line'>199:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>200:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$path<br>
+<span class='line'>201:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>202:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>203:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">loadFromFile</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>204:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>205:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_file</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>206:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">json_decode</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">file_get_contents</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">),&nbsp;</span><span style="color: #000">true</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>207:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>208:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>209:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>210:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>211:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>212:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>213:    </span><br>
+<span class='line'>214:    </span><br>
+<span class='line'>215:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>216:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$translations<br>
+<span class='line'>217:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>218:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>219:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">normalizeTranslations</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translations</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>220:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>221:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'>222:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$translations&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$name&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>223:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$list&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">false</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>224:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">preg_match</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'~^--\s(.*)~'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$match</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>225:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$name&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$match</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">1</span><span style="color: #D24; font-weight: bold">];<br>
+<span class='line'>226:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$list&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">true</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>227:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>228:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_string</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>229:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;[</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">];<br>
+<span class='line'>230:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(</span><span style="color: #000">is_array</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>231:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;array();<br>
+<span class='line'>232:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$translation&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>233:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_array</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>234:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$buf&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'>235:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$t&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$sub</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>236:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #000">preg_match</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'~^\#.*\#$~'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$sub</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>237:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$buf</span><span style="color: #D24; font-weight: bold">[]&nbsp;=&nbsp;</span><span style="color: #000">$sub</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>238:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>239:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>240:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">][]&nbsp;=&nbsp;</span><span style="color: #000">$buf</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>241:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>242:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #000">preg_match</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'~^\#.*\#$~'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>243:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">$list&nbsp;</span><span style="color: #D24; font-weight: bold">===&nbsp;</span><span style="color: #000">true&nbsp;</span><span style="color: #D24; font-weight: bold">&amp;&amp;&nbsp;!</span><span style="color: #000">is_array</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>244:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$t&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array(</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>245:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>246:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">][]&nbsp;=&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>247:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>248:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>249:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>250:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>251:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>252:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>253:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>254:    </span><br>
+<span class='line'>255:    </span><br>
+<span class='line'>256:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>257:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$message<br>
+<span class='line'>258:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array|null<br>
+<span class='line'>259:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>260:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">findTranslation</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>261:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>262:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$info&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">getMessageInfo</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>263:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">loadCategory</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$info</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'path'</span><span style="color: #D24; font-weight: bold">],&nbsp;</span><span style="color: #000">$info</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'category'</span><span style="color: #D24; font-weight: bold">]);<br>
+<span class='line'>264:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;isset(</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$info</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'name'</span><span style="color: #D24; font-weight: bold">]])&nbsp;?&nbsp;</span><span style="color: #000">$data</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$info</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'name'</span><span style="color: #D24; font-weight: bold">]]&nbsp;:&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>265:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>266:    </span><br>
+<span class='line'>267:    </span><br>
+<span class='line'>268:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>269:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$message<br>
+<span class='line'>270:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;int|null&nbsp;$count<br>
+<span class='line'>271:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$args<br>
+<span class='line'>272:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array|string<br>
+<span class='line'>273:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;\Exception<br>
+<span class='line'>274:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>275:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">translate</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">,&nbsp;array&nbsp;</span><span style="color: #000">$args&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array())<br>
+<span class='line'>276:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>277:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">language&nbsp;</span><span style="color: #D24; font-weight: bold">===&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>278:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'You&nbsp;have&nbsp;to&nbsp;set&nbsp;language.'</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>279:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>280:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>281:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #000">is_string</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>282:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>283:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>284:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>285:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">$count&nbsp;</span><span style="color: #D24; font-weight: bold">!==&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>286:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #080">'count'</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>287:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>288:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>289:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">preg_match</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'~^\:(.*)\:$~'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$match</span><span style="color: #D24; font-weight: bold">)&nbsp;!==&nbsp;</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>290:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$match</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">1</span><span style="color: #D24; font-weight: bold">];<br>
+<span class='line'>291:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>292:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">applyReplacements</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>293:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$translation&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">findTranslation</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>294:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>295:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">$translation&nbsp;</span><span style="color: #D24; font-weight: bold">!==&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>296:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">pluralize</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>297:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>298:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>299:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>300:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">prepareTranslation</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>301:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>302:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>303:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>304:    </span><br>
+<span class='line'>305:    </span><br>
+<span class='line'>306:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>307:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$message<br>
+<span class='line'>308:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$key<br>
+<span class='line'>309:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$value<br>
+<span class='line'>310:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;int|null&nbsp;$count<br>
+<span class='line'>311:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$args<br>
+<span class='line'>312:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>313:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;\Exception<br>
+<span class='line'>314:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>315:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">public&nbsp;function&nbsp;</span><span style="color: #000">translatePairs</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$key</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">,&nbsp;array&nbsp;</span><span style="color: #000">$args&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array())<br>
+<span class='line'>316:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>317:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$key&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #080">"</span><span style="color: #000">$message</span><span style="color: #080">.</span><span style="color: #000">$key</span><span style="color: #080">"</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>318:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$value&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #080">"</span><span style="color: #000">$message</span><span style="color: #080">.</span><span style="color: #000">$value</span><span style="color: #080">"</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>319:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>320:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$key&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">translate</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$key</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>321:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$value&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">translate</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>322:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>323:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #000">is_array</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$key</span><span style="color: #D24; font-weight: bold">)&nbsp;||&nbsp;!</span><span style="color: #000">is_array</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>324:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'Translations&nbsp;are&nbsp;not&nbsp;arrays.'</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>325:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>326:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>327:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">count</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$key</span><span style="color: #D24; font-weight: bold">)&nbsp;!==&nbsp;</span><span style="color: #000">count</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>328:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'Keys&nbsp;and&nbsp;values&nbsp;translations&nbsp;have&nbsp;not&nbsp;got&nbsp;the&nbsp;same&nbsp;length.'</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>329:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>330:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>331:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">array_combine</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$key</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>332:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>333:    </span><br>
+<span class='line'>334:    </span><br>
+<span class='line'>335:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>336:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$message<br>
+<span class='line'>337:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$translation<br>
+<span class='line'>338:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;int|null&nbsp;$count<br>
+<span class='line'>339:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array|string<br>
+<span class='line'>340:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>341:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">pluralize</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;array&nbsp;</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>342:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>343:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">$count&nbsp;</span><span style="color: #D24; font-weight: bold">!==&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>344:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_string</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">]))&nbsp;{<br>
+<span class='line'>345:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$pluralForm&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #080">'n='</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">';plural=+('</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">plurals</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">language</span><span style="color: #D24; font-weight: bold">][</span><span style="color: #080">'form'</span><span style="color: #D24; font-weight: bold">].&nbsp;</span><span style="color: #080">');'</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>346:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$pluralForm&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">preg_replace</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'/([a-z]+)/'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #080">'$$1'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$pluralForm</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>347:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>348:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$n&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>349:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$plural&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">null</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>350:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>351:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eval(</span><span style="color: #000">$pluralForm</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>352:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>353:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$plural&nbsp;</span><span style="color: #D24; font-weight: bold">!==&nbsp;</span><span style="color: #000">null&nbsp;</span><span style="color: #D24; font-weight: bold">&amp;&amp;&nbsp;isset(</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$plural</span><span style="color: #D24; font-weight: bold">])&nbsp;?&nbsp;</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$plural</span><span style="color: #D24; font-weight: bold">]&nbsp;:&nbsp;</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">];<br>
+<span class='line'>354:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>355:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'>356:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$translation&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>357:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">[]&nbsp;=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">pluralize</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$count</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>358:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>359:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>360:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>361:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>362:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_string</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">]))&nbsp;{<br>
+<span class='line'>363:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$translation</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">];<br>
+<span class='line'>364:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>365:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'>366:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$translation&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>367:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">[]&nbsp;=&nbsp;</span><span style="color: #000">$t</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">];<br>
+<span class='line'>368:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>369:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>370:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>371:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>372:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>373:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>374:    </span><br>
+<span class='line'>375:    </span><br>
+<span class='line'>376:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>377:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string|array&nbsp;$message<br>
+<span class='line'>378:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$args<br>
+<span class='line'>379:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array|string<br>
+<span class='line'>380:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>381:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">prepareTranslation</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;array&nbsp;</span><span style="color: #000">$args&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array())<br>
+<span class='line'>382:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>383:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_string</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'>384:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">applyReplacements</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>385:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>
+<span class='line'>386:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
+<span class='line'>387:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$m</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>388:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">[]&nbsp;=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">prepareTranslation</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$m</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$args</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>389:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>390:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$result</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>391:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>392:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>393:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>394:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>395:    </span><br>
+<span class='line'>396:    </span><br>
+<span class='line'>397:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>398:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$message<br>
+<span class='line'>399:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$args<br>
+<span class='line'>400:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;string<br>
+<span class='line'>401:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>402:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">applyReplacements</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;array&nbsp;</span><span style="color: #000">$args&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array())<br>
+<span class='line'>403:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>404:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$replacements&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">replacements</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>405:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>406:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$args&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$name&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>407:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$replacements</span><span style="color: #D24; font-weight: bold">[</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">]&nbsp;=&nbsp;</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>408:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>409:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>410:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #000">$replacements&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">$name&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>411:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">$value&nbsp;</span><span style="color: #D24; font-weight: bold">!==&nbsp;</span><span style="color: #000">false</span><span style="color: #D24; font-weight: bold">)&nbsp;{<br>
+<span class='line'>412:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$message&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">preg_replace</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'~%'</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #000">$name</span><span style="color: #D24; font-weight: bold">.&nbsp;</span><span style="color: #080">'%~'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$value</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>413:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<span class='line'>414:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>415:    </span><br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>416:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">;<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>417:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>418:    </span><br>
+<span class='line'>419:    </span><br>
+<span class='line'>420:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>421:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$message<br>
+<span class='line'>422:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
+<span class='line'>423:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+<span class='line'>424:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">getMessageInfo</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>425:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>426:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$num&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">strrpos</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #080">'.'</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>427:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$path&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">substr</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$num</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>428:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$name&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">substr</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$message</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$num&nbsp;</span><span style="color: #D24; font-weight: bold">+&nbsp;</span><span style="color: #000">1</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>429:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$num&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">strrpos</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #080">'.'</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>430:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$category&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">substr</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$num&nbsp;</span><span style="color: #D24; font-weight: bold">+&nbsp;</span><span style="color: #000">1</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>431:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$path&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">substr</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">0</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$num</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'>432:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$path&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">preg_replace</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'~\.~'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #080">'/'</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>433:    </span><br>
+<span class='line'>434:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>435:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #080">'path'&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,<br>
+<span class='line'>436:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #080">'category'&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$category</span><span style="color: #D24; font-weight: bold">,<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>437:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #080">'name'&nbsp;</span><span style="color: #D24; font-weight: bold">=&gt;&nbsp;</span><span style="color: #000">$name<br>
+</span></span></code></div>
+<div class='t'><code><span style="color: #06B"><span style="color: #000"><span class='line'>438:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">);<br>
+</span></span></code></div>
+<div class='dead'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>439:    </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+</span></span></code></div>
+<div><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>440:    </span><br>
+</span></span></code></div>
+</div>
+	</div>
+		<div>
+		<table>
+		<tr class='light'>
+			<td class="number"><small>0 %</small></td>
+			<td><div class="bar"><div style="width: 0%"></div></div></td>
+			<td><a href="#fragment1" onclick="toggle(this)"><span>Nette/Translator.php</span></a></td>
+		</tr>
+		</table>
+
+		<div class="code" id="fragment1">
+		<div><span class='line'> 1:    </span><code><span style="color: #06B">
+<span style="color: #000">&lt;?php<br>
+<span class='line'> 2:    </span><br>
+<span class='line'> 3:    </span></span><span style="color: #D24; font-weight: bold">namespace&nbsp;</span><span style="color: #000">DK</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Nette</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'> 4:    </span><br>
+<span class='line'> 5:    </span>if&nbsp;(!</span><span style="color: #000">interface_exists</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'Nette\Localization\ITranslator'</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
+<span class='line'> 6:    </span>&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'Nette&nbsp;was&nbsp;not&nbsp;found'</span><span style="color: #D24; font-weight: bold">);<br>
+<span class='line'> 7:    </span>}<br>
+<span class='line'> 8:    </span><br>
+<span class='line'> 9:    </span>use&nbsp;</span><span style="color: #000">DK</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">DKTranslator</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>10:    </span>use&nbsp;</span><span style="color: #000">Nette</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Localization</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">ITranslator</span><span style="color: #D24; font-weight: bold">;<br>
+<span class='line'>11:    </span><br>
+<span class='line'>12:    </span></span><span style="color: #999; font-style: italic">/**<br>
+<span class='line'>13:    </span>&nbsp;*<br>
+<span class='line'>14:    </span>&nbsp;*&nbsp;@author&nbsp;David&nbsp;Kudera<br>
+<span class='line'>15:    </span>&nbsp;*/<br>
+<span class='line'>16:    </span></span><span style="color: #D24; font-weight: bold">class&nbsp;</span><span style="color: #000">Translator&nbsp;</span><span style="color: #D24; font-weight: bold">extends&nbsp;</span><span style="color: #000">DKTranslator&nbsp;</span><span style="color: #D24; font-weight: bold">implements&nbsp;</span><span style="color: #000">ITranslator<br>
+<span class='line'>17:    </span></span><span style="color: #D24; font-weight: bold">{<br>
+<span class='line'>18:    </span><br>
+</span></span></code></div>
+</div>
+	</div>
+	
+	<footer>
+		<p>Generated by <a href="https://github.com/nette/tester">Nette Tester</a> at 2013/09/14 11:22:46</p>
+	</footer>
+
+	<script>
+	function toggle(link) {
+		var el = document.getElementById(link.href.split('#')[1]);
+		if (el.style.display === 'block') {
+			el.style.display = 'none';
+			return false;
+		} else {
+			el.style.display = 'block';
+		}
+	}
+	</script>
+</body>
+</html>

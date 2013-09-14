@@ -41,12 +41,21 @@ class Translator
 
 
 	/**
-	 * @return $this
+	 * @return \DK\Translator\Translator
 	 */
 	public function invalidate()
 	{
 		$this->data = array();
 		return $this;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->data;
 	}
 
 
@@ -145,6 +154,15 @@ class Translator
 
 		unset($this->replacements[$search]);
 		return $this;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getReplacements()
+	{
+		return $this->replacements;
 	}
 
 

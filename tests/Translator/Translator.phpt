@@ -34,6 +34,20 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testSetDirectory()
+	{
+		Assert::exception(function() {
+			$this->translator->setDirectory(__DIR__. '/../unknown');
+		}, 'Exception');
+	}
+
+
+	public function testGetLanguage()
+	{
+		Assert::same('en', $this->translator->getLanguage());
+	}
+
+
 	public function testLoadPlurals()
 	{
 		$plurals = $this->translator->getPluralForms();
@@ -41,10 +55,60 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testAddReplacement()
+	{
+		$this->translator->addReplacement('test', 'Test');
+		$replacements = $this->translator->getReplacements();
+		Assert::true(isset($replacements['test']));
+		Assert::contains('Test', $replacements);
+	}
+
+
+	public function testRemoveReplacement()
+	{
+		$this->translator->addReplacement('test', 'Test');
+		$this->translator->removeReplacement('test');
+		$replacements = $this->translator->getReplacements();
+		Assert::true(!isset($replacements['test']));
+		Assert::notContains('Test', $replacements);		// I know that this is useless
+	}
+
+
+	public function testRemoveReplacement_notExists()
+	{
+		Assert::exception(function() {
+			$this->translator->removeReplacement('test');
+		}, 'Exception');
+	}
+
+
 	public function testTranslate()
 	{
 		$t = $this->translator->translate('web.pages.homepage.promo.title');
 		Assert::same('Title of promo box', $t);
+	}
+
+
+	public function testTranslate_notExists()
+	{
+		$t = $this->translator->translate('unknown.message');
+		Assert::same('unknown.message', $t);
+	}
+
+
+	public function testTranslate_withoutLanguage()
+	{
+		$this->translator->setLanguage(null);
+		Assert::exception(function() {
+			$this->translator->translate('web.pages.homepage.simple.title');
+		}, 'Exception');
+	}
+
+
+	public function testTranslate_notString()
+	{
+		$t = $this->translator->translate(array());
+		Assert::same(array(), $t);
 	}
 
 
@@ -120,6 +184,27 @@ class TranslatorTest extends TestCase
 		Assert::exception(function() {
 			$this->translator->translatePairs('web.pages.homepage.promo', 'list', 'keys');
 		}, 'Exception');
+	}
+
+
+	public function testGetData()
+	{
+		$this->translator->translate('web.pages.homepage.simple.title');
+		$data = $this->translator->getData();
+		Assert::same(array(
+			'web/pages/homepage/simple' => array(
+				'title' => array('Title of promo box')
+			)
+		), $data);
+	}
+
+
+	public function testInvalidate()
+	{
+		$this->translator->translate('web.pages.homepage.simple.title');
+		$this->translator->invalidate();
+		$data = $this->translator->getData();
+		Assert::same(array(), $data);
 	}
 
 }
