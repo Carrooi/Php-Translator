@@ -274,6 +274,37 @@ Output:
 ]
 ```
 
+## Comments in dictionaries
+
+You can write some comments into your dictionaries. These comments has to be enclosed into `#`.
+
+```
+{
+	"message": [
+		"# this message will be displayed in home page #",
+		 "translation of message"
+	]
+}
+```
+
+Or with lists:
+
+```
+{
+	"list": [
+		"# this is list of some items #",
+		[
+			"# first item in list #",
+			"first"
+		],
+		[
+			"# second item in list #",
+			"second"
+		]
+	]
+}
+```
+
 ## With Nette
 
 ```
@@ -285,6 +316,7 @@ new $translator = new \DK\Translator\Nette\Translator('/app/lang');
 * 1.3.0
 	+ Added tests
 	+ Added shorter syntax for writing lists
+	+ Added support for comments
 
 * 1.2.2
 	+ Optimized plural forms

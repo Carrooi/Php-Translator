@@ -204,11 +204,19 @@ class Translator
 				$result[$name] = array();
 				foreach ($translation as $t) {
 					if (is_array($t)) {
-						$result[$name][] = $t;
+						$buf = array();
+						foreach ($t as $sub) {
+							if (!preg_match('~^\#.*\#$~', $sub)) {
+								$buf[] = $sub;
+							}
+						}
+						$result[$name][] = $buf;
 					} else {
-						if ($list === true && !is_array($t)) {
-							$t = array($t);
-							$result[$name][] = $t;
+						if (!preg_match('~^\#.*\#$~', $t)) {
+							if ($list === true && !is_array($t)) {
+								$t = array($t);
+								$result[$name][] = $t;
+							}
 						}
 					}
 				}
