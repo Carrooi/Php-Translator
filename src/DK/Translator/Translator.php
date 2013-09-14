@@ -112,6 +112,15 @@ class Translator
 
 
 	/**
+	 * @return array
+	 */
+	public function getPluralForms()
+	{
+		return $this->plurals;
+	}
+
+
+	/**
 	 * @param string $search
 	 * @param string $replacement
 	 * @return \DK\Translator\Translator
@@ -215,14 +224,11 @@ class Translator
 						if (!preg_match('~^\#.*\#$~', $t)) {
 							if ($list === true && !is_array($t)) {
 								$t = array($t);
-								$result[$name][] = $t;
 							}
+							$result[$name][] = $t;
 						}
 					}
 				}
-
-
-				$result[$name] = $translation;
 			}
 		}
 		return $result;
@@ -263,7 +269,7 @@ class Translator
 		}
 
 		if (preg_match('~^\:(.*)\:$~', $message, $match) !== 0) {
-			$message = $message[1];
+			$message = $match[1];
 		} else {
 			$message = $this->applyReplacements($message, $args);
 			$translation = $this->findTranslation($message);

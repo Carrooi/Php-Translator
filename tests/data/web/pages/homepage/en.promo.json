@@ -1,0 +1,48 @@
+{
+	"title": "Title of promo box",
+	"list": [
+		["1st item"],
+		["2nd item"],
+		["3rd item"],
+		["4th item"],
+		["5th item"]
+	],
+	"cars": [
+		"1 car",
+		"%count% cars"
+	],
+	"fruits": [
+		"# this is some random comment #",
+		[
+			"1 banana",
+			"%count% bananas"
+		],
+		[
+			"1 citron",
+			"# another comment #",
+			"%count% citrons"
+		],
+		[
+			"1 orange",
+			"%count% oranges"
+		]
+	],
+	"keys": [
+		["1st title"],
+		["2nd title"],
+		["3rd title"],
+		["4th title"]
+	],
+	"values": [
+		["1st text"],
+		["2nd text"],
+		["3rd text"],
+		["4th text"]
+	],
+	"advanced": "%one% %two%",
+	"-- newList": [
+		"first",
+		"second",
+		"third"
+	]
+}
