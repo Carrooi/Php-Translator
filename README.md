@@ -307,9 +307,7 @@ Or with lists:
 
 ## With Nette
 
-```
-new $translator = new \DK\Translator\Nette\Translator('/app/lang');
-```
+
 
 ## Changelog
 

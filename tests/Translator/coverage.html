@@ -346,7 +346,7 @@
 <span class='line'>189:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$categoryName<br>
 <span class='line'>190:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
 <span class='line'>191:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
-<span class='line'>192:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">load</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>192:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">protected&nbsp;function&nbsp;</span><span style="color: #000">load</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">,&nbsp;</span><span style="color: #000">$categoryName</span><span style="color: #D24; font-weight: bold">)<br>
 <span class='line'>193:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
 </span></span></code></div>
 <div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>194:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$data&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;</span><span style="color: #000">$this</span><span style="color: #D24; font-weight: bold">-&gt;</span><span style="color: #000">loadFromFile</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">);<br>
@@ -360,7 +360,7 @@
 <span class='line'>200:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;$path<br>
 <span class='line'>201:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
 <span class='line'>202:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
-<span class='line'>203:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">loadFromFile</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>203:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">protected&nbsp;function&nbsp;</span><span style="color: #000">loadFromFile</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">)<br>
 <span class='line'>204:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
 </span></span></code></div>
 <div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>205:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #000">is_file</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$path</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
@@ -381,7 +381,7 @@
 <span class='line'>216:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;array&nbsp;$translations<br>
 <span class='line'>217:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array<br>
 <span class='line'>218:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
-<span class='line'>219:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">private&nbsp;function&nbsp;</span><span style="color: #000">normalizeTranslations</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translations</span><span style="color: #D24; font-weight: bold">)<br>
+<span class='line'>219:    </span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #D24; font-weight: bold">protected&nbsp;function&nbsp;</span><span style="color: #000">normalizeTranslations</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #000">$translations</span><span style="color: #D24; font-weight: bold">)<br>
 <span class='line'>220:    </span>&nbsp;&nbsp;&nbsp;&nbsp;{<br>
 </span></span></code></div>
 <div class='t'><code><span style="color: #06B"><span style="color: #D24; font-weight: bold"><span class='line'>221:    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000">$result&nbsp;</span><span style="color: #D24; font-weight: bold">=&nbsp;array();<br>
@@ -678,41 +678,9 @@
 </span></span></code></div>
 </div>
 	</div>
-		<div>
-		<table>
-		<tr class='light'>
-			<td class="number"><small>0 %</small></td>
-			<td><div class="bar"><div style="width: 0%"></div></div></td>
-			<td><a href="#fragment1" onclick="toggle(this)"><span>Nette/Translator.php</span></a></td>
-		</tr>
-		</table>
-
-		<div class="code" id="fragment1">
-		<div><span class='line'> 1:    </span><code><span style="color: #06B">
-<span style="color: #000">&lt;?php<br>
-<span class='line'> 2:    </span><br>
-<span class='line'> 3:    </span></span><span style="color: #D24; font-weight: bold">namespace&nbsp;</span><span style="color: #000">DK</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Nette</span><span style="color: #D24; font-weight: bold">;<br>
-<span class='line'> 4:    </span><br>
-<span class='line'> 5:    </span>if&nbsp;(!</span><span style="color: #000">interface_exists</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'Nette\Localization\ITranslator'</span><span style="color: #D24; font-weight: bold">))&nbsp;{<br>
-<span class='line'> 6:    </span>&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\</span><span style="color: #000">Exception</span><span style="color: #D24; font-weight: bold">(</span><span style="color: #080">'Nette&nbsp;was&nbsp;not&nbsp;found'</span><span style="color: #D24; font-weight: bold">);<br>
-<span class='line'> 7:    </span>}<br>
-<span class='line'> 8:    </span><br>
-<span class='line'> 9:    </span>use&nbsp;</span><span style="color: #000">DK</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Translator&nbsp;</span><span style="color: #D24; font-weight: bold">as&nbsp;</span><span style="color: #000">DKTranslator</span><span style="color: #D24; font-weight: bold">;<br>
-<span class='line'>10:    </span>use&nbsp;</span><span style="color: #000">Nette</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">Localization</span><span style="color: #D24; font-weight: bold">\</span><span style="color: #000">ITranslator</span><span style="color: #D24; font-weight: bold">;<br>
-<span class='line'>11:    </span><br>
-<span class='line'>12:    </span></span><span style="color: #999; font-style: italic">/**<br>
-<span class='line'>13:    </span>&nbsp;*<br>
-<span class='line'>14:    </span>&nbsp;*&nbsp;@author&nbsp;David&nbsp;Kudera<br>
-<span class='line'>15:    </span>&nbsp;*/<br>
-<span class='line'>16:    </span></span><span style="color: #D24; font-weight: bold">class&nbsp;</span><span style="color: #000">Translator&nbsp;</span><span style="color: #D24; font-weight: bold">extends&nbsp;</span><span style="color: #000">DKTranslator&nbsp;</span><span style="color: #D24; font-weight: bold">implements&nbsp;</span><span style="color: #000">ITranslator<br>
-<span class='line'>17:    </span></span><span style="color: #D24; font-weight: bold">{<br>
-<span class='line'>18:    </span><br>
-</span></span></code></div>
-</div>
-	</div>
 	
 	<footer>
-		<p>Generated by <a href="https://github.com/nette/tester">Nette Tester</a> at 2013/09/14 11:22:46</p>
+		<p>Generated by <a href="https://github.com/nette/tester">Nette Tester</a> at 2013/09/14 15:05:12</p>
 	</footer>
 
 	<script>

@@ -189,7 +189,7 @@ class Translator
 	 * @param string $categoryName
 	 * @return array
 	 */
-	private function load($path, $categoryName)
+	protected function load($path, $categoryName)
 	{
 		$data = $this->loadFromFile($path);
 		return $this->normalizeTranslations($data);
@@ -200,7 +200,7 @@ class Translator
 	 * @param string $path
 	 * @return array
 	 */
-	private function loadFromFile($path)
+	protected function loadFromFile($path)
 	{
 		if (is_file($path)) {
 			$data = json_decode(file_get_contents($path), true);
@@ -216,7 +216,7 @@ class Translator
 	 * @param array $translations
 	 * @return array
 	 */
-	private function normalizeTranslations($translations)
+	protected function normalizeTranslations($translations)
 	{
 		$result = array();
 		foreach ($translations as $name => $translation) {
