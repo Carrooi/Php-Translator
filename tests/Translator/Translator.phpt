@@ -159,6 +159,13 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testTranslate_secondArgArguments()
+	{
+		$t = $this->translator->translate('web.pages.homepage.promo.advanced', array('one' => 1, 'two' => 2));
+		Assert::same('1 2', $t);
+	}
+
+
 	public function testTranslatePairs()
 	{
 		$t = $this->translator->translatePairs('web.pages.homepage.promo', 'keys', 'values');

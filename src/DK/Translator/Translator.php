@@ -282,6 +282,11 @@ class Translator
 			return $message;
 		}
 
+		if (is_array($count)) {
+			$args = $count;
+			$count = null;
+		}
+
 		if ($count !== null) {
 			$args['count'] = $count;
 		}

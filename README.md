@@ -152,6 +152,14 @@ $message = $translator->translate('dictionary.info', null, array(		// output: di
 ));
 ```
 
+if you do not need to pass any count (like in example above), you can remove second argument (null).
+
+```
+$message = $translator->translate('dictionary.info', array(		// output: display some random variable: 2 books
+	'something' => '2 books'
+));
+```
+
 ### In names of translations
 
 These replacements can be used also in message names. This is quite useful when you have got for example different user
@@ -318,6 +326,9 @@ If you want to use this translator with nette, please use [sakren/nette-translat
 library.
 
 ## Changelog
+
+* 1.3.2
+	+ Translate method: can pass args as second argument
 
 * 1.3.1
 	+ Added some information
