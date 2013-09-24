@@ -166,6 +166,30 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testTranslate_directAccess()
+	{
+		Assert::same('first', $this->translator->translate('web.pages.homepage.promo.newList[0]'));
+		Assert::same('second', $this->translator->translate('web.pages.homepage.promo.newList[1]'));
+		Assert::same('third', $this->translator->translate('web.pages.homepage.promo.newList[2]'));
+	}
+
+
+	public function testTranslate_directAccessNonList()
+	{
+		Assert::exception(function() {
+			$this->translator->translate('web.pages.homepage.promo.title[5]');
+		}, 'Exception');
+	}
+
+
+	public function testTranslate_directAccessOutOfRange()
+	{
+		Assert::exception(function() {
+			$this->translator->translate('web.pages.homepage.promo.newList[5]');
+		}, 'Exception');
+	}
+
+
 	public function testTranslatePairs()
 	{
 		$t = $this->translator->translatePairs('web.pages.homepage.promo', 'keys', 'values');

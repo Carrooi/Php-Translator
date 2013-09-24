@@ -240,6 +240,12 @@ Usage:
 $messages = $translator->translate('dictionary.fruits', 6);		// output: array(6 oranges, 6 bananas)
 ```
 
+### Accessing exact item
+
+```
+$message = $translator->translate('dictionary.someList[0]');
+```
+
 ### Shorter syntax
 
 If your list contains just singular forms translations, you can use shorter syntax for it.
@@ -326,6 +332,9 @@ If you want to use this translator with nette, please use [sakren/nette-translat
 library.
 
 ## Changelog
+
+* 1.4.0
+	+ Accessing items from lists in translate method
 
 * 1.3.2
 	+ Translate method: can pass args as second argument

@@ -294,8 +294,26 @@ class Translator
 		if (preg_match('~^\:(.*)\:$~', $message, $match) !== 0) {
 			$message = $match[1];
 		} else {
+			$num = null;
+			if (preg_match('~(.+)\[(\d+)\]$~', $message, $match) !== 0) {
+				$message = $match[1];
+				$num = (int) $match[2];
+			}
+
 			$message = $this->applyReplacements($message, $args);
 			$translation = $this->findTranslation($message);
+
+			if ($num !== null) {
+				if (!$this->isList($translation)) {
+					throw new \Exception('Translation '. $message. ' is not a list.');
+				}
+
+				if (!isset($translation[$num])) {
+					throw new \Exception('Item '. $num. ' was not found in '. $message. ' translation.');
+				}
+
+				$translation = $translation[$num];
+			}
 
 			if ($translation !== null) {
 				$message = $this->pluralize($message, $translation, $count);
@@ -334,6 +352,16 @@ class Translator
 		}
 
 		return array_combine($key, $value);
+	}
+
+
+	/**
+	 * @param array $translation
+	 * @return bool
+	 */
+	private function isList($translation)
+	{
+		return is_array($translation[0]);
 	}
 
 
