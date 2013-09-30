@@ -218,6 +218,64 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testTranslateMap()
+	{
+		$t = $this->translator->translateMap(array(
+			'web.pages.homepage.promo.title',
+			'web.pages.homepage.promo.info'
+		));
+		Assert::same(array(
+			'Title of promo box',
+			'Some info text'
+		), $t);
+	}
+
+
+	public function testTranslateMap_plurals()
+	{
+		$t = $this->translator->translateMap(array(
+			'web.pages.homepage.promo.cars',
+			'web.pages.homepage.promo.mobile'
+		), 6);
+		Assert::same(array(
+			'6 cars',
+			'6 mobiles'
+		), $t);
+	}
+
+
+	public function testTranslateMap_arguments()
+	{
+		$t = $this->translator->translateMap(array(
+			'web.pages.homepage.promo.advanced'
+		), null, array('one' => 1, 'two' => 2));
+		Assert::same(array(
+			'1 2'
+		), $t);
+	}
+
+
+	public function testTranslateMap_base()
+	{
+		$t = $this->translator->translateMap(array('title', 'info'), null, null, 'web.pages.homepage.promo');
+		Assert::same(array(
+			'Title of promo box',
+			'Some info text'
+		), $t);
+	}
+
+
+	public function testTranslateMap_list()
+	{
+		$t = $this->translator->translateMap(array('web.pages.homepage.promo.fruits'), 4);
+		Assert::same(array(array(
+			'4 bananas',
+			'4 citrons',
+			'4 oranges'
+		)), $t);
+	}
+
+
 	public function testGetData()
 	{
 		$this->translator->translate('web.pages.homepage.simple.title');

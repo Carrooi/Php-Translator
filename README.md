@@ -295,6 +295,44 @@ Output:
 ]
 ```
 
+## Translate whole array
+
+When you have got some array, which you need to translate, you don't have to iterate through it yourself.
+
+```
+$messages = array(
+    'homepage.promo.box.title',
+    'homepage.promo.box.description',
+    'homepage.promo.box.text'
+);
+
+$result = $translator->translateMap($messages);
+```
+
+If your array to translate contains translations just from one dictionary, you can set some kind of base path.
+
+```
+$messages = array(
+    'title',
+    'description',
+    'text'
+);
+
+$result = $translator->translateMap($messages, null, null, 'homepage.promo.box.title');
+```
+
+Or use count for translations with plural forms.
+
+```
+$result = $translator->translateMap($messages, 6);
+```
+
+Or with some replacements.
+
+```
+$result = $translator->translateMap($messages, null, array('type' => 'book'));
+```
+
 ## Comments in dictionaries
 
 You can write some comments into your dictionaries. These comments has to be enclosed into `#`.
@@ -332,6 +370,9 @@ If you want to use this translator with nette, please use [sakren/nette-translat
 library.
 
 ## Changelog
+
+* 1.5.0
+	+ Added translateMap method
 
 * 1.4.0
 	+ Accessing items from lists in translate method

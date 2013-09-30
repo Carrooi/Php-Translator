@@ -356,6 +356,27 @@ class Translator
 
 
 	/**
+	 * @param array $list
+	 * @param int|null $count
+	 * @param array $args
+	 * @param string|null $base
+	 * @return array
+	 */
+	public function translateMap(array $list, $count = null, array $args = null, $base = null)
+	{
+		if ($args === null) {
+			$args = array();
+		}
+
+		$base = $base === null ? '' : $base. '.';
+
+		return array_map(function($a) use($count, $args, $base) {
+			return $this->translate($base. $a, $count, $args);
+		}, $list);
+	}
+
+
+	/**
 	 * @param array $translation
 	 * @return bool
 	 */

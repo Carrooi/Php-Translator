@@ -1,5 +1,6 @@
 {
 	"title": "Title of promo box",
+	"info": "Some info text",
 	"list": [
 		["1st item"],
 		["2nd item"],
@@ -10,6 +11,10 @@
 	"cars": [
 		"1 car",
 		"%count% cars"
+	],
+	"mobile": [
+		 "1 mobile",
+		"%count% mobiles"
 	],
 	"fruits": [
 		"# this is some random comment #",
