@@ -6,12 +6,13 @@ if (@!include __DIR__ . '/../../vendor/autoload.php') {
 }
 
 // configure environment
-Tester\Helpers::setup();
+Tester\Environment::setup();
 class_alias('Tester\Assert', 'Assert');
 date_default_timezone_set('Europe/Prague');
 
 // create temporary directory
 define('TEMP_DIR', __DIR__ . '/../tmp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
+echo TEMP_DIR;
 Tester\Helpers::purge(TEMP_DIR);
 
 
