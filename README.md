@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/sakren/php-translator.png?branch=master)](https://travis-ci.org/sakren/php-translator)
+
+[![Donate](http://b.repl.ca/v1/donate-PayPal-brightgreen.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RY2VVL44CA94Q)
+
 # translator
 
 PHP translator with plural forms support.
