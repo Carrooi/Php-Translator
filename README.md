@@ -401,6 +401,9 @@ library.
 
 ## Changelog
 
+* 1.6.1
+	+ Some internal changes
+
 * 1.6.0
 	+ Optimizations
 	+ Added badges and travis

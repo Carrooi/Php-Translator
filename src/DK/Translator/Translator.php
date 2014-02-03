@@ -252,7 +252,7 @@ class Translator
 	 * @param string|null $language
 	 * @return array
 	 */
-	private function loadCategory($path, $name, $language = null)
+	public function _loadCategory($path, $name, $language = null)
 	{
 		if ($language === null) {
 			$language = $this->getLanguage();
@@ -261,7 +261,7 @@ class Translator
 		$categoryName = $path. '/'. $name;
 		if (!isset($this->data[$categoryName])) {
 			$data = $this->loader->load($path, $name, $language);
-			$data = $this->normalizeTranslations($data);
+			$data = $this->_normalizeTranslations($data);
 
 			$this->data[$categoryName] = $data;
 		}
@@ -274,7 +274,7 @@ class Translator
 	 * @param array $translations
 	 * @return array
 	 */
-	private function normalizeTranslations($translations)
+	private function _normalizeTranslations($translations)
 	{
 		$result = array();
 		foreach ($translations as $name => $translation) {
@@ -340,7 +340,7 @@ class Translator
 		}
 
 		$info = $this->getMessageInfo($message);
-		$data = $this->loadCategory($info['path'], $info['category'], $language);
+		$data = $this->_loadCategory($info['path'], $info['category'], $language);
 		return isset($data[$info['name']]) ? $data[$info['name']] : null;
 	}
 
