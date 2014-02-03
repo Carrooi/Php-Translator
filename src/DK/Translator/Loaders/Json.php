@@ -44,7 +44,7 @@ class Json implements Loader
 		if (is_file($path)) {
 			return json_decode(file_get_contents($path));
 		} else {
-			return [];
+			return array();
 		}
 	}
 
