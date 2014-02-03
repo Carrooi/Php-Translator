@@ -26,6 +26,9 @@ class Translator
 	private $replacements = array();
 
 	/** @var array  */
+	private $filters = array();
+
+	/** @var array  */
 	private $data = array();
 
 
@@ -211,6 +214,38 @@ class Translator
 
 
 	/**
+	 * @param callable $fn
+	 * @return \DK\Translator\Translator
+	 */
+	public function addFilter($fn)
+	{
+		$this->filters[] = $fn;
+		return $this;
+	}
+
+
+	/**
+	 * @param string|array $translation
+	 * @return array
+	 */
+	private function applyFilters($translation)
+	{
+		if (is_array($translation)) {
+			$_this = $this;
+			return array_map(function($t) use($_this) {
+				return $_this->applyFilters($t);
+			}, $translation);
+		}
+
+		foreach ($this->filters as $filter) {
+			$translation = $filter($translation);
+		}
+
+		return $translation;
+	}
+
+
+	/**
 	 * @param string $path
 	 * @param string $name
 	 * @param string|null $language
@@ -332,6 +367,7 @@ class Translator
 		}
 
 		$language = $this->getLanguage();
+		$found = false;
 
 		if (preg_match('~^\:(.*)\:$~', $message, $match)) {
 			$message = $match[1];
@@ -357,6 +393,8 @@ class Translator
 			$message = $this->applyReplacements($message, $args);
 			$translation = $this->findTranslation($message, $language);
 
+			$found = $this->hasTranslation($message);
+
 			if ($num !== null) {
 				if (!$this->isList($translation)) {
 					throw new \Exception('Translation '. $message. ' is not a list.');
@@ -375,6 +413,10 @@ class Translator
 		}
 
 		$message = $this->prepareTranslation($message, $args);
+
+		if ($found) {
+			$message = $this->applyFilters($message);
+		}
 
 		return $message;
 	}
