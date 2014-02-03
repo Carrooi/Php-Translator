@@ -467,8 +467,9 @@ class Translator
 
 		$base = $base === null ? '' : $base. '.';
 
-		return array_map(function($a) use($count, $args, $base) {
-			return $this->translate($base. $a, $count, $args);
+		$_this = $this;
+		return array_map(function($a) use($_this, $count, $args, $base) {
+			return $_this->translate($base. $a, $count, $args);
 		}, $list);
 	}
 
