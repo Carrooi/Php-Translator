@@ -193,6 +193,19 @@ $translator->addReplacement('role', $user->getRole());
 $translator->translate('admin.%role%');
 ```
 
+## Filters (eg. markdown)
+
+If you want some special formatting in your translations (for example markdown syntax or others) you can add filter
+which will automatically transform all successfully translated messages.
+
+```
+$translator->addFilter(function($message) {
+	return strrev($message);
+});
+
+var_dump($translator->translate('homepage.title'));			// output is reversed title in homepage dictionary
+```
+
 ## List of translations
 
 Sometimes you may want to display list of texts but don't want to create translations with these names: item1, item2,
@@ -337,6 +350,19 @@ Or with some replacements.
 $result = $translator->translateMap($messages, null, array('type' => 'book'));
 ```
 
+## Temporary override language
+
+There may be some cases when you need to get translations for different language.
+
+```
+$translator = new \DK\Translator\Translator('/app/lang');
+$translator->setLanguage('en');
+
+$message = $translator->translate('cs|homepage.title');
+```
+
+Now in `message` variable will be translation of `homepage.title` in czech language.
+
 ## Comments in dictionaries
 
 You can write some comments into your dictionaries. These comments has to be enclosed into `#`.
@@ -374,6 +400,15 @@ If you want to use this translator with nette, please use [sakren/nette-translat
 library.
 
 ## Changelog
+
+* 1.6.0
+	+ Optimizations
+	+ Added badges and travis
+	+ Failing tests after clean installation
+	+ Creating translator from config file (for API)
+	+ Added method `hasTranslation`
+	+ Option for temporary overriding language
+	+ Added filters
 
 * 1.5.0
 	+ Added translateMap method
