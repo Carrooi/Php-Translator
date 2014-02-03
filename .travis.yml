@@ -10,7 +10,8 @@ matrix:
   allow_failures:
     - php: hhvm
 
-script: ./tests/run-tests.sh
+script: VERBOSE=true ./tests/run-tests.sh -s tests/Translator
 
 before_script:
+  - composer self-update
   - composer install --no-interaction --dev --prefer-source
