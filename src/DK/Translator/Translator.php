@@ -2,6 +2,9 @@
 
 namespace DK\Translator;
 
+use DK\Translator\Loaders\Loader;
+use Tester\Dumper;
+
 /**
  *
  * @author David Kudera
@@ -10,8 +13,8 @@ class Translator
 {
 
 
-	/** @var string */
-	private $directory;
+	/** @var \DK\Translator\Loaders\Loader */
+	private $loader;
 
 	/** @var string */
 	private $language;
@@ -23,20 +26,89 @@ class Translator
 	private $replacements = array();
 
 	/** @var array  */
+	private $filters = array();
+
+	/** @var array  */
 	private $data = array();
 
 
 	/**
-	 * @param string $directory
+	 * @param string|\DK\Translator\Loaders\Loader $pathOrLoader
+	 * @throws \Exception
 	 */
-	public function __construct($directory)
+	public function __construct($pathOrLoader)
 	{
-		$this->setDirectory($directory);
+		if (!is_string($pathOrLoader) && !$pathOrLoader instanceof Loader) {
+			throw new \Exception('Argument passed to translator must be string or Loader.');
+		}
+
+		if (is_string($pathOrLoader)) {
+			$config = array(
+				'path' => $pathOrLoader,
+				'loader' => 'Json'
+			);
+
+			if (preg_match('/\.json$/', $pathOrLoader)) {
+				$_config = json_decode(file_get_contents($pathOrLoader));
+				if (isset($_config->path)) {
+					$config['path'] = $_config->path;
+				}
+				if (isset($_config->loader)) {
+					$config['loader'] = $_config->loader;
+				}
+				if ($config['path'][0] === '.') {
+					$config['path'] = $this->joinPaths(dirname($pathOrLoader), $config['path']);
+				}
+			}
+
+			$loader = "\\DK\\Translator\\Loaders\\$config[loader]";
+			$pathOrLoader = new $loader($config['path']);
+		}
+
+		$this->setLoader($pathOrLoader);
 
 		$plurals = json_decode(file_get_contents(__DIR__. '/pluralForms.json'), true);
 		foreach ($plurals as $language => $data) {
 			$this->addPluralForm($language, $data['count'], $data['form']);
 		}
+	}
+
+
+	/**
+	 * @param string $left
+	 * @param string $right
+	 * @return string
+	 */
+	private function joinPaths($left, $right)
+	{
+		$paths = array();
+		foreach (func_get_args() as $arg) {
+			if ($arg !== '') {
+				$paths[] = $arg;
+			}
+		}
+		$path = preg_replace('#/+#','/',join('/', $paths));
+		return realpath($path);
+	}
+
+
+	/**
+	 * @return \DK\Translator\Loaders\Loader
+	 */
+	public function getLoader()
+	{
+		return $this->loader;
+	}
+
+
+	/**
+	 * @param \DK\Translator\Loaders\Loader $loader
+	 * @return \DK\Translator\Translator
+	 */
+	public function setLoader(Loader $loader)
+	{
+		$this->loader = $loader;
+		return $this;
 	}
 
 
@@ -56,31 +128,6 @@ class Translator
 	public function getData()
 	{
 		return $this->data;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getDirectory()
-	{
-		return $this->directory;
-	}
-
-
-	/**
-	 * @param string $directory
-	 * @return \DK\Translator\Translator
-	 * @throws \Exception
-	 */
-	public function setDirectory($directory)
-	{
-		if (!is_dir($directory)) {
-			throw new \Exception("Directory '$directory'' does not exists.");
-		}
-
-		$this->directory = $directory;
-		return $this;
 	}
 
 
@@ -167,17 +214,56 @@ class Translator
 
 
 	/**
-	 * @param string $path
-	 * @param string $name
+	 * @param callable $fn
+	 * @return \DK\Translator\Translator
+	 */
+	public function addFilter($fn)
+	{
+		$this->filters[] = $fn;
+		return $this;
+	}
+
+
+	/**
+	 * @private public because of php 5.3
+	 * @param string|array $translation
 	 * @return array
 	 */
-	private function loadCategory($path, $name)
+	public function _applyFilters($translation)
 	{
+		if (is_array($translation)) {
+			$_this = $this;
+			return array_map(function($t) use($_this) {
+				return $_this->_applyFilters($t);
+			}, $translation);
+		}
+
+		foreach ($this->filters as $filter) {
+			$translation = $filter($translation);
+		}
+
+		return $translation;
+	}
+
+
+	/**
+	 * @param string $path
+	 * @param string $name
+	 * @param string|null $language
+	 * @return array
+	 */
+	private function loadCategory($path, $name, $language = null)
+	{
+		if ($language === null) {
+			$language = $this->getLanguage();
+		}
+
 		$categoryName = $path. '/'. $name;
 		if (!isset($this->data[$categoryName])) {
-			$name = $path. '/'. $this->language. '.'. $name. '.json';
-			$path = $this->getDirectory(). '/'. $name;
-			$this->data[$categoryName] = $this->load($path, $categoryName);
+			$data = $this->loader->load($path, $name, $language);
+			$data = $this->normalizeTranslations($data);
+
+			$this->data[$categoryName] = $data;
 		}
 
 		return $this->data[$categoryName];
@@ -185,38 +271,10 @@ class Translator
 
 
 	/**
-	 * @param string $path
-	 * @param string $categoryName
-	 * @return array
-	 */
-	protected function load($path, $categoryName)
-	{
-		$data = $this->loadFromFile($path);
-		return $this->normalizeTranslations($data);
-	}
-
-
-	/**
-	 * @param string $path
-	 * @return array
-	 */
-	protected function loadFromFile($path)
-	{
-		if (is_file($path)) {
-			$data = json_decode(file_get_contents($path), true);
-		} else {
-			$data = array();
-		}
-
-		return $data;
-	}
-
-
-	/**
 	 * @param array $translations
 	 * @return array
 	 */
-	protected function normalizeTranslations($translations)
+	private function normalizeTranslations($translations)
 	{
 		$result = array();
 		foreach ($translations as $name => $translation) {
@@ -225,8 +283,9 @@ class Translator
 				$name = $match[1];
 				$list = true;
 			}
+
 			if (is_string($translation)) {
-				$result[$name] = [$translation];
+				$result[$name] = array($translation);
 			} elseif (is_array($translation)) {
 				$result[$name] = array();
 				foreach ($translation as $t) {
@@ -249,18 +308,39 @@ class Translator
 				}
 			}
 		}
+
 		return $result;
 	}
 
 
 	/**
 	 * @param string $message
+	 * @param null|string $language
+	 * @return bool
+	 */
+	public function hasTranslation($message, $language = null)
+	{
+		if ($language === null) {
+			$language = $this->getLanguage();
+		}
+
+		return $this->findTranslation($message, $language) !== null;
+	}
+
+
+	/**
+	 * @param string $message
+	 * @param null|string $language
 	 * @return array|null
 	 */
-	private function findTranslation($message)
+	private function findTranslation($message, $language = null)
 	{
+		if ($language === null) {
+			$language = $this->getLanguage();
+		}
+
 		$info = $this->getMessageInfo($message);
-		$data = $this->loadCategory($info['path'], $info['category']);
+		$data = $this->loadCategory($info['path'], $info['category'], $language);
 		return isset($data[$info['name']]) ? $data[$info['name']] : null;
 	}
 
@@ -274,10 +354,6 @@ class Translator
 	 */
 	public function translate($message, $count = null, array $args = array())
 	{
-		if ($this->language === null) {
-			throw new \Exception('You have to set language.');
-		}
-
 		if (!is_string($message)) {
 			return $message;
 		}
@@ -291,17 +367,34 @@ class Translator
 			$args['count'] = $count;
 		}
 
-		if (preg_match('~^\:(.*)\:$~', $message, $match) !== 0) {
+		$language = $this->getLanguage();
+		$found = false;
+
+		if (preg_match('~^\:(.*)\:$~', $message, $match)) {
 			$message = $match[1];
+			if (preg_match('/^[a-z]+\|(.*)$/', $message, $match)) {
+				$message = $match[1];
+			}
 		} else {
+			if (preg_match('/^([a-z]+)\|(.*)$/', $message, $match)) {
+				$language = $match[1];
+				$message = $match[2];
+			}
+
+			if ($language === null) {
+				throw new \Exception('You have to set language.');
+			}
+
 			$num = null;
-			if (preg_match('~(.+)\[(\d+)\]$~', $message, $match) !== 0) {
+			if (preg_match('~(.+)\[(\d+)\]$~', $message, $match)) {
 				$message = $match[1];
 				$num = (int) $match[2];
 			}
 
 			$message = $this->applyReplacements($message, $args);
-			$translation = $this->findTranslation($message);
+			$translation = $this->findTranslation($message, $language);
+
+			$found = $this->hasTranslation($message);
 
 			if ($num !== null) {
 				if (!$this->isList($translation)) {
@@ -316,11 +409,15 @@ class Translator
 			}
 
 			if ($translation !== null) {
-				$message = $this->pluralize($message, $translation, $count);
+				$message = $this->pluralize($message, $translation, $count, $language);
 			}
 		}
 
 		$message = $this->prepareTranslation($message, $args);
+
+		if ($found) {
+			$message = $this->_applyFilters($message);
+		}
 
 		return $message;
 	}
@@ -370,8 +467,9 @@ class Translator
 
 		$base = $base === null ? '' : $base. '.';
 
-		return array_map(function($a) use($count, $args, $base) {
-			return $this->translate($base. $a, $count, $args);
+		$_this = $this;
+		return array_map(function($a) use($_this, $count, $args, $base) {
+			return $_this->translate($base. $a, $count, $args);
 		}, $list);
 	}
 
@@ -390,13 +488,18 @@ class Translator
 	 * @param string $message
 	 * @param array $translation
 	 * @param int|null $count
+	 * @param string|null $language
 	 * @return array|string
 	 */
-	private function pluralize($message, array $translation, $count = null)
+	private function pluralize($message, array $translation, $count = null, $language = null)
 	{
+		if ($language === null) {
+			$language = $this->getLanguage();
+		}
+
 		if ($count !== null) {
 			if (is_string($translation[0])) {
-				$pluralForm = 'n='. $count. ';plural=+('. $this->plurals[$this->language]['form']. ');';
+				$pluralForm = 'n='. $count. ';plural=+('. $this->plurals[$language]['form']. ');';
 				$pluralForm = preg_replace('/([a-z]+)/', '$$1', $pluralForm);
 
 				$n = null;
@@ -408,7 +511,7 @@ class Translator
 			} else {
 				$result = array();
 				foreach ($translation as $t) {
-					$result[] = $this->pluralize($message, $t, $count);
+					$result[] = $this->pluralize($message, $t, $count, $language);
 				}
 				$message = $result;
 			}
@@ -481,9 +584,13 @@ class Translator
 		$path = substr($message, 0, $num);
 		$name = substr($message, $num + 1);
 		$num = strrpos($path, '.');
-		$category = substr($path, $num + 1);
+		if ($num !== false) {
+			$category = substr($path, $num + 1);
+		} else {
+			$category = $path;
+		}
 		$path = substr($path, 0, $num);
-		$path = preg_replace('~\.~', '/', $path);
+		$path = preg_replace('/\./', '/', $path);
 
 		return array(
 			'path' => $path,

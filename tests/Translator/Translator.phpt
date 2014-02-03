@@ -34,11 +34,10 @@ class TranslatorTest extends TestCase
 	}
 
 
-	public function testSetDirectory()
+	public function testConstruct_config()
 	{
-		Assert::exception(function() {
-			$this->translator->setDirectory(__DIR__. '/../unknown');
-		}, 'Exception');
+		$translator = new Translator(__DIR__. '/../data/config.json');
+		Assert::same(realpath(__DIR__. '/../data'), $translator->getLoader()->getDirectory());
 	}
 
 
@@ -76,9 +75,34 @@ class TranslatorTest extends TestCase
 
 	public function testRemoveReplacement_notExists()
 	{
-		Assert::exception(function() {
-			$this->translator->removeReplacement('test');
+		$translator = $this->translator;
+		Assert::exception(function() use($translator) {
+			$translator->removeReplacement('test');
 		}, 'Exception');
+	}
+
+
+	public function testHasTranslation_exists()
+	{
+		Assert::true($this->translator->hasTranslation('web.pages.homepage.promo.title'));
+	}
+
+
+	public function testHasTranslation_exists_language()
+	{
+		Assert::true($this->translator->hasTranslation('web.pages.homepage.simple.title', 'cs'));
+	}
+
+
+	public function testHasTranslation_notExists()
+	{
+		Assert::false($this->translator->hasTranslation('some.unknown.translation'));
+	}
+
+
+	public function testHasTranslation_notExists_language()
+	{
+		Assert::false($this->translator->hasTranslation('some.unknown.translation', 'cs'));
 	}
 
 
@@ -86,29 +110,6 @@ class TranslatorTest extends TestCase
 	{
 		$t = $this->translator->translate('web.pages.homepage.promo.title');
 		Assert::same('Title of promo box', $t);
-	}
-
-
-	public function testTranslate_notExists()
-	{
-		$t = $this->translator->translate('unknown.message');
-		Assert::same('unknown.message', $t);
-	}
-
-
-	public function testTranslate_withoutLanguage()
-	{
-		$this->translator->setLanguage(null);
-		Assert::exception(function() {
-			$this->translator->translate('web.pages.homepage.simple.title');
-		}, 'Exception');
-	}
-
-
-	public function testTranslate_notString()
-	{
-		$t = $this->translator->translate(array());
-		Assert::same(array(), $t);
 	}
 
 
@@ -123,13 +124,6 @@ class TranslatorTest extends TestCase
 	{
 		$t = $this->translator->translate('web.pages.homepage.promo.list');
 		Assert::same(array('1st item', '2nd item', '3rd item', '4th item', '5th item'), $t);
-	}
-
-
-	public function testTranslate_shorterList()
-	{
-		$t = $this->translator->translate('web.pages.homepage.promo.newList');
-		Assert::same(array('first', 'second', 'third'), $t);
 	}
 
 
@@ -174,19 +168,110 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testTranslate_rootDirectory()
+	{
+		Assert::same('hello', $this->translator->translate('first.test'));
+	}
+
+
 	public function testTranslate_directAccessNonList()
 	{
-		Assert::exception(function() {
-			$this->translator->translate('web.pages.homepage.promo.title[5]');
+		$translator = $this->translator;
+		Assert::exception(function() use($translator) {
+			$translator->translate('web.pages.homepage.promo.title[5]');
 		}, 'Exception');
 	}
 
 
 	public function testTranslate_directAccessOutOfRange()
 	{
-		Assert::exception(function() {
-			$this->translator->translate('web.pages.homepage.promo.newList[5]');
+		$translator = $this->translator;
+		Assert::exception(function() use($translator) {
+			$translator->translate('web.pages.homepage.promo.newList[5]');
 		}, 'Exception');
+	}
+
+
+	public function testTranslate_notExists()
+	{
+		$t = $this->translator->translate('unknown.message');
+		Assert::same('unknown.message', $t);
+	}
+
+
+	public function testTranslate_withoutLanguage()
+	{
+		$this->translator->setLanguage(null);
+		$translator = $this->translator;
+		Assert::exception(function() use($translator) {
+			$translator->translate('web.pages.homepage.simple.title');
+		}, 'Exception');
+	}
+
+
+	public function testTranslate_notString()
+	{
+		$t = $this->translator->translate(array());
+		Assert::same(array(), $t);
+	}
+
+
+	public function testTranslate_shorterList()
+	{
+		$t = $this->translator->translate('web.pages.homepage.promo.newList');
+		Assert::same(array('first', 'second', 'third'), $t);
+	}
+
+
+	public function testTranslate_language()
+	{
+		Assert::same('Titulek promo boxu', $this->translator->translate('cs|web.pages.homepage.simple.title'));
+	}
+
+
+	public function testTranslate_language_skipped()
+	{
+		Assert::same('do.not.translate.me', $this->translator->translate(':cs|do.not.translate.me:'));
+	}
+
+
+	public function testTranslate_filters_not_found()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same('unknown.title', $this->translator->translate('unknown.title'));
+	}
+
+
+	public function testTranslate_filters_not_translatable()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same('web.pages.homepage.simple.title', $this->translator->translate(':web.pages.homepage.simple.title:'));
+	}
+
+
+	public function testTranslate_filters()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same('xob omorp fo eltiT', $this->translator->translate('web.pages.homepage.simple.title'));
+	}
+
+
+	public function testTranslate_filters_lists()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same(array(
+			'sananab 3',
+			'snortic 3',
+			'segnaro 3'
+		), $this->translator->translate('web.pages.homepage.promo.fruits', 3));
 	}
 
 
@@ -204,16 +289,18 @@ class TranslatorTest extends TestCase
 
 	public function testTranslatePairs_notArrays()
 	{
-		Assert::exception(function() {
-			$this->translator->translatePairs('web.pages.homepage.promo', 'title', 'list');
+		$translator = $this->translator;
+		Assert::exception(function() use($translator) {
+			$translator->translatePairs('web.pages.homepage.promo', 'title', 'list');
 		}, 'Exception');
 	}
 
 
 	public function testTranslatePairs_differentLength()
 	{
-		Assert::exception(function() {
-			$this->translator->translatePairs('web.pages.homepage.promo', 'list', 'keys');
+		$translator = $this->translator;
+		Assert::exception(function() use($translator) {
+			$translator->translatePairs('web.pages.homepage.promo', 'list', 'keys');
 		}, 'Exception');
 	}
 
