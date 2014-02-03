@@ -231,6 +231,46 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testTranslate_filters_not_found()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same('unknown.title', $this->translator->translate('unknown.title'));
+	}
+
+
+	public function testTranslate_filters_not_translatable()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same('web.pages.homepage.simple.title', $this->translator->translate(':web.pages.homepage.simple.title:'));
+	}
+
+
+	public function testTranslate_filters()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same('xob omorp fo eltiT', $this->translator->translate('web.pages.homepage.simple.title'));
+	}
+
+
+	public function testTranslate_filters_lists()
+	{
+		$this->translator->addFilter(function($message) {
+			return strrev($message);
+		});
+		Assert::same(array(
+			'sananab 3',
+			'snortic 3',
+			'segnaro 3'
+		), $this->translator->translate('web.pages.homepage.promo.fruits', 3));
+	}
+
+
 	public function testTranslatePairs()
 	{
 		$t = $this->translator->translatePairs('web.pages.homepage.promo', 'keys', 'values');
