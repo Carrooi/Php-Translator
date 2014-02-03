@@ -284,7 +284,7 @@ class Translator
 			}
 
 			if (is_string($translation)) {
-				$result[$name] = [$translation];
+				$result[$name] = array($translation);
 			} elseif (is_array($translation)) {
 				$result[$name] = array();
 				foreach ($translation as $t) {
