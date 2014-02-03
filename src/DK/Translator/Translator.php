@@ -225,15 +225,16 @@ class Translator
 
 
 	/**
+	 * @private public because of php 5.3
 	 * @param string|array $translation
 	 * @return array
 	 */
-	private function applyFilters($translation)
+	public function _applyFilters($translation)
 	{
 		if (is_array($translation)) {
 			$_this = $this;
 			return array_map(function($t) use($_this) {
-				return $_this->applyFilters($t);
+				return $_this->_applyFilters($t);
 			}, $translation);
 		}
 
@@ -415,7 +416,7 @@ class Translator
 		$message = $this->prepareTranslation($message, $args);
 
 		if ($found) {
-			$message = $this->applyFilters($message);
+			$message = $this->_applyFilters($message);
 		}
 
 		return $message;
