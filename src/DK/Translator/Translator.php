@@ -31,6 +31,9 @@ class Translator
 	/** @var array  */
 	private $data = array();
 
+	/** @var array  */
+	private $translated = array();
+
 
 	/**
 	 * @param string|\DK\Translator\Loaders\Loader $pathOrLoader
@@ -71,6 +74,15 @@ class Translator
 		foreach ($plurals as $language => $data) {
 			$this->addPluralForm($language, $data['count'], $data['form']);
 		}
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getTranslated()
+	{
+		return $this->translated;
 	}
 
 
@@ -375,6 +387,8 @@ class Translator
 			if (preg_match('/^[a-z]+\|(.*)$/', $message, $match)) {
 				$message = $match[1];
 			}
+
+			$originalMessage = $message;
 		} else {
 			if (preg_match('/^([a-z]+)\|(.*)$/', $message, $match)) {
 				$language = $match[1];
@@ -391,10 +405,9 @@ class Translator
 				$num = (int) $match[2];
 			}
 
-			$message = $this->applyReplacements($message, $args);
+			$message = $originalMessage = $this->applyReplacements($message, $args);
 			$translation = $this->findTranslation($message, $language);
-
-			$found = $this->hasTranslation($message);
+			$found = $this->hasTranslation($message, $language);
 
 			if ($num !== null) {
 				if (!$this->isList($translation)) {
@@ -417,6 +430,10 @@ class Translator
 
 		if ($found) {
 			$message = $this->_applyFilters($message);
+
+			if (!in_array($originalMessage, $this->translated)) {
+				$this->translated[] = $originalMessage;
+			}
 		}
 
 		return $message;

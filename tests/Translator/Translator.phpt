@@ -275,6 +275,27 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testGetTranslated_empty()
+	{
+		Assert::same(array(), $this->translator->getTranslated());
+
+		$this->translator->translate('web.pages.homepage.promo.fruits', 3);
+		$this->translator->translate('web.pages.homepage.promo.newList[2]');
+		$this->translator->translate('unknown.title');
+		$this->translator->translate('web.pages.homepage.promo.newList[2]');
+		$this->translator->translate('web.pages.homepage.promo.title');
+		$this->translator->translate('cs|web.pages.homepage.simple.title');
+		$this->translator->translate(':web.pages.homepage.simple.title:');
+
+		Assert::same(array(
+			'web.pages.homepage.promo.fruits',
+			'web.pages.homepage.promo.newList',
+			'web.pages.homepage.promo.title',
+			'web.pages.homepage.simple.title',
+		), $this->translator->getTranslated());
+	}
+
+
 	public function testTranslatePairs()
 	{
 		$t = $this->translator->translatePairs('web.pages.homepage.promo', 'keys', 'values');
