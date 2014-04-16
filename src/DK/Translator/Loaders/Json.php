@@ -53,6 +53,21 @@ class Json implements Loader
 	 * @param string $parent
 	 * @param string $name
 	 * @param string $language
+	 * @param array $data
+	 */
+	public function save($parent, $name, $language, $data)
+	{
+		$options = PHP_VERSION_ID >= 504000 ? JSON_PRETTY_PRINT : 0;
+		$path = $this->getFileSystemPath($parent, $name, $language);
+
+		file_put_contents($path, json_encode($data, $options));
+	}
+
+
+	/**
+	 * @param string $parent
+	 * @param string $name
+	 * @param string $language
 	 * @return string
 	 */
 	public function getFileSystemPath($parent, $name, $language)
