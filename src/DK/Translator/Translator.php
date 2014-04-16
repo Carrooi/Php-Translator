@@ -34,6 +34,9 @@ class Translator
 	/** @var array  */
 	private $translated = array();
 
+	/** @var array  */
+	private $untranslated = array();
+
 
 	/**
 	 * @param string|\DK\Translator\Loaders\Loader $pathOrLoader
@@ -83,6 +86,15 @@ class Translator
 	public function getTranslated()
 	{
 		return $this->translated;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getUntranslated()
+	{
+		return $this->untranslated;
 	}
 
 
@@ -381,8 +393,10 @@ class Translator
 
 		$language = $this->getLanguage();
 		$found = false;
+		$disabled = false;
 
 		if (preg_match('~^\:(.*)\:$~', $message, $match)) {
+			$disabled = true;
 			$message = $match[1];
 			if (preg_match('/^[a-z]+\|(.*)$/', $message, $match)) {
 				$message = $match[1];
@@ -434,6 +448,8 @@ class Translator
 			if (!in_array($originalMessage, $this->translated)) {
 				$this->translated[] = $originalMessage;
 			}
+		} elseif (!$disabled && !in_array($originalMessage, $this->untranslated)) {
+			$this->untranslated[] = $originalMessage;
 		}
 
 		return $message;
