@@ -401,6 +401,10 @@ library.
 
 ## Changelog
 
+* 1.6.2
+	+ Added methods `getTranslated()` and `getUntranslated()`
+	+ Added method `save()` into loaders (prepared for future improvements)
+
 * 1.6.1
 	+ Some internal changes
 

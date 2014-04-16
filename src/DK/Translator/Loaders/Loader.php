@@ -23,6 +23,16 @@ interface Loader
 	 * @param string $parent
 	 * @param string $name
 	 * @param string $language
+	 * @param array $data
+	 * @return void
+	 */
+	public function save($parent, $name, $language, $data);
+
+
+	/**
+	 * @param string $parent
+	 * @param string $name
+	 * @param string $language
 	 * @return string
 	 */
 	public function getFileSystemPath($parent, $name, $language);
