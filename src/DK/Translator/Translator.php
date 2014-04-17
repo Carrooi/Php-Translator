@@ -611,7 +611,7 @@ class Translator
 	 * @param string $message
 	 * @return array
 	 */
-	private function getMessageInfo($message)
+	public function getMessageInfo($message)
 	{
 		$num = strrpos($message, '.');
 		$path = substr($message, 0, $num);
