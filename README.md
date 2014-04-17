@@ -401,6 +401,9 @@ library.
 
 ## Changelog
 
+* 1.6.3
+	+ Method `findTranslation()` is now public
+
 * 1.6.2
 	+ Added methods `getTranslated()` and `getUntranslated()`
 	+ Added method `save()` into loaders (prepared for future improvements)
