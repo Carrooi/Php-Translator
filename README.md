@@ -401,6 +401,9 @@ library.
 
 ## Changelog
 
+* 1.6.4
+	+ Method `getMessageInfo()` is now public
+
 * 1.6.3
 	+ Method `findTranslation()` is now public
 
