@@ -357,7 +357,7 @@ class Translator
 	 * @param null|string $language
 	 * @return array|null
 	 */
-	private function findTranslation($message, $language = null)
+	public function findTranslation($message, $language = null)
 	{
 		if ($language === null) {
 			$language = $this->getLanguage();
