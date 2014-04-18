@@ -416,6 +416,11 @@ library.
 
 ## Changelog
 
+* 1.7.0
+	+ Optimized messages parsing
+	+ Added translation helpers
+	+ Added method `getLastTranslated()`
+
 * 1.6.4
 	+ Method `getMessageInfo()` is now public
 
