@@ -206,6 +206,21 @@ $translator->addFilter(function($message) {
 var_dump($translator->translate('homepage.title'));			// output is reversed title in homepage dictionary
 ```
 
+## Helpers
+
+You can imagine helpers as translation dependent filter with optional arguments.
+
+```
+$translator->addHelper('truncate', function($translation, $length) {
+	return substr($translation, 0, $length);
+});
+$translator->addHelper('firstUpper', function($translation) {
+	return ucfirst($translation);
+});
+
+var_dump($translator->translate('homepage.promo.box.description|truncate:4|firstUpper');		// output: Some
+```
+
 ## List of translations
 
 Sometimes you may want to display list of texts but don't want to create translations with these names: item1, item2,
@@ -400,6 +415,11 @@ If you want to use this translator with nette, please use [sakren/nette-translat
 library.
 
 ## Changelog
+
+* 1.7.0
+	+ Optimized messages parsing
+	+ Added translation helpers
+	+ Added method `getLastTranslated()`
 
 * 1.6.4
 	+ Method `getMessageInfo()` is now public
