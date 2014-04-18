@@ -29,6 +29,9 @@ class Translator
 	private $filters = array();
 
 	/** @var array  */
+	private $helpers = array();
+
+	/** @var array  */
 	private $data = array();
 
 	/** @var array  */
@@ -249,6 +252,18 @@ class Translator
 
 
 	/**
+	 * @param string $name
+	 * @param callable $fn
+	 * @return \DK\Translator\Translator
+	 */
+	public function addHelper($name, $fn)
+	{
+		$this->helpers[$name] = $fn;
+		return $this;
+	}
+
+
+	/**
 	 * @private public because of php 5.3
 	 * @param string|array $translation
 	 * @return array
@@ -257,13 +272,42 @@ class Translator
 	{
 		if (is_array($translation)) {
 			$_this = $this;
-			return array_map(function($t) use($_this) {
+			return array_map(function($t) use ($_this) {
 				return $_this->_applyFilters($t);
 			}, $translation);
 		}
 
 		foreach ($this->filters as $filter) {
 			$translation = $filter($translation);
+		}
+
+		return $translation;
+	}
+
+
+	/**
+	 * @param $translation
+	 * @param array $helpers
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function applyHelpers($translation, array $helpers)
+	{
+		if (is_array($translation)) {
+			$_this = $this;
+			return array_map(function($t) use ($_this, $helpers) {
+				return $_this->applyHelpers($t, $helpers);
+			}, $translation);
+		}
+
+		foreach ($helpers as $helper) {
+			if (!isset($this->helpers[$helper['name']])) {
+				throw new \Exception('Helper '. $helper['name']. ' is not registered.');
+			}
+
+			array_unshift($helper['arguments'], $translation);
+
+			$translation = call_user_func_array($this->helpers[$helper['name']], $helper['arguments']);
 		}
 
 		return $translation;
@@ -339,6 +383,66 @@ class Translator
 
 	/**
 	 * @param string $message
+	 * @return array
+	 */
+	public function normalizeMessage($message)
+	{
+		$ignored = false;
+		$language = null;
+		$num = null;
+		$helpers = array();
+
+		// :do.not.translate.me:
+		if (preg_match('/^\:(.*)\:$/', $message, $match)) {
+			$message = $match[1];
+			$ignored = true;
+		}
+
+		// cs|overridden.language
+		if (preg_match('/^([a-zA-Z-]+)\|(.*)$/', $message, $match)) {
+			$message = $match[2];
+			$language = $match[1];
+		}
+
+		// accessing.list.item[5]
+		if (preg_match('/(.+)\[(\d+)\](|.*)?$/', $message, $match)) {
+			$message = $match[1]. $match[3];		// append helpers
+			$num = (int) $match[2];
+		}
+
+		// parse.helpers|truncate:5|firstUpper
+		if (preg_match('/^(.*?)\|(.*)$/', $message, $match)) {
+			$message = $match[1];
+			$helpers = explode('|', $match[2]);
+
+			$helpers = array_map(function($helper) {
+				$name = $helper;
+				$arguments = array();
+
+				if (preg_match('/^(.*?)\:(.*)$/', $helper, $match)) {
+					$name = $match[1];
+					$arguments = explode(':', $match[2]);
+				}
+
+				return array(
+					'name' => $name,
+					'arguments' => $arguments,
+				);
+			}, $helpers);
+		}
+
+		return array(
+			'ignored' => $ignored,
+			'language' => $language,
+			'message' => $message,
+			'num' => $num,
+			'helpers' => $helpers,
+		);
+	}
+
+
+	/**
+	 * @param string $message
 	 * @param null|string $language
 	 * @return bool
 	 */
@@ -391,34 +495,21 @@ class Translator
 			$args['count'] = $count;
 		}
 
-		$language = $this->getLanguage();
 		$found = false;
-		$disabled = false;
 
-		if (preg_match('~^\:(.*)\:$~', $message, $match)) {
-			$disabled = true;
-			$message = $match[1];
-			if (preg_match('/^[a-z]+\|(.*)$/', $message, $match)) {
-				$message = $match[1];
-			}
+		$messageInfo = $this->normalizeMessage($message);
 
-			$originalMessage = $message;
+		$message = $messageInfo['message'];
+		$num = $messageInfo['num'];
+		$language = $messageInfo['language'] ?: $this->getLanguage();
+
+		if ($language === null) {
+			throw new \Exception('You have to set language.');
+		}
+
+		if ($messageInfo['ignored']) {
+			$originalMessage = $messageInfo['message'];
 		} else {
-			if (preg_match('/^([a-z]+)\|(.*)$/', $message, $match)) {
-				$language = $match[1];
-				$message = $match[2];
-			}
-
-			if ($language === null) {
-				throw new \Exception('You have to set language.');
-			}
-
-			$num = null;
-			if (preg_match('~(.+)\[(\d+)\]$~', $message, $match)) {
-				$message = $match[1];
-				$num = (int) $match[2];
-			}
-
 			$message = $originalMessage = $this->applyReplacements($message, $args);
 			$translation = $this->findTranslation($message, $language);
 			$found = $this->hasTranslation($message, $language);
@@ -445,10 +536,14 @@ class Translator
 		if ($found) {
 			$message = $this->_applyFilters($message);
 
+			if (count($messageInfo['helpers']) > 0) {
+				$message = $this->applyHelpers($message, $messageInfo['helpers']);
+			}
+
 			if (!in_array($originalMessage, $this->translated)) {
 				$this->translated[] = $originalMessage;
 			}
-		} elseif (!$disabled && !in_array($originalMessage, $this->untranslated)) {
+		} elseif (!$messageInfo['ignored'] && !in_array($originalMessage, $this->untranslated)) {
 			$this->untranslated[] = $originalMessage;
 		}
 
