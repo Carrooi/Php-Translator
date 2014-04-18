@@ -106,6 +106,141 @@ class TranslatorTest extends TestCase
 	}
 
 
+	public function testNormalizeMessage()
+	{
+		Assert::same(array(
+			'ignored' => false,
+			'language' => null,
+			'message' => 'some.message.title',
+			'num' => null,
+			'helpers' => array(),
+		), $this->translator->normalizeMessage('some.message.title'));
+	}
+
+
+	public function testNormalizeMessage_ignored()
+	{
+		Assert::same(array(
+			'ignored' => true,
+			'language' => null,
+			'message' => 'do.not.translate.me',
+			'num' => null,
+			'helpers' => array(),
+		), $this->translator->normalizeMessage(':do.not.translate.me:'));
+	}
+
+
+	public function testNormalizeMessage_language()
+	{
+		Assert::same(array(
+			'ignored' => false,
+			'language' => 'cs',
+			'message' => 'overridden.language.title',
+			'num' => null,
+			'helpers' => array(),
+		), $this->translator->normalizeMessage('cs|overridden.language.title'));
+	}
+
+
+	public function testNormalizeMessage_listItem()
+	{
+		Assert::same(array(
+			'ignored' => false,
+			'language' => null,
+			'message' => 'accessing.list.item',
+			'num' => 5,
+			'helpers' => array(),
+		), $this->translator->normalizeMessage('accessing.list.item[5]'));
+	}
+
+
+	public function testNormalizeMessage_helpers()
+	{
+		Assert::same(array(
+			'ignored' => false,
+			'language' => null,
+			'message' => 'some.helper',
+			'num' => null,
+			'helpers' => array(
+				array(
+					'name' => 'firstUpper',
+					'arguments' => array(),
+				),
+			),
+		), $this->translator->normalizeMessage('some.helper|firstUpper'));
+	}
+
+
+	public function testNormalizeMessage_helpersMore()
+	{
+		Assert::same(array(
+			'ignored' => false,
+			'language' => null,
+			'message' => 'some.helper',
+			'num' => null,
+			'helpers' => array(
+				array(
+					'name' => 'firstWord',
+					'arguments' => array(),
+				),
+				array(
+					'name' => 'firstUpper',
+					'arguments' => array(),
+				),
+			),
+		), $this->translator->normalizeMessage('some.helper|firstWord|firstUpper'));
+	}
+
+
+	public function testNormalizeMessage_helpersArguments()
+	{
+		Assert::same(array(
+			'ignored' => false,
+			'language' => null,
+			'message' => 'some.helper',
+			'num' => null,
+			'helpers' => array(
+				array(
+					'name' => 'firstWord',
+					'arguments' => array(),
+				),
+				array(
+					'name' => 'truncate',
+					'arguments' => array('5'),
+				),
+				array(
+					'name' => 'removeLetters',
+					'arguments' => array('a', 'b', 'c'),
+				),
+				array(
+					'name' => 'firstUpper',
+					'arguments' => array(),
+				),
+			),
+		), $this->translator->normalizeMessage('some.helper|firstWord|truncate:5|removeLetters:a:b:c|firstUpper'));
+	}
+
+	public function testNormalizeMessage_combined()
+	{
+		Assert::same(array(
+			'ignored' => true,
+			'language' => 'cs',
+			'message' => 'page.home.button',
+			'num' => 4,
+			'helpers' => array(
+				array(
+					'name' => 'truncate',
+					'arguments' => array('5'),
+				),
+				array(
+					'name' => 'firstUpper',
+					'arguments' => array(),
+				),
+			),
+		), $this->translator->normalizeMessage(':cs|page.home.button[4]|truncate:5|firstUpper:'));
+	}
+
+
 	public function testTranslate()
 	{
 		$t = $this->translator->translate('web.pages.homepage.promo.title');
@@ -272,6 +407,19 @@ class TranslatorTest extends TestCase
 			'snortic 3',
 			'segnaro 3'
 		), $this->translator->translate('web.pages.homepage.promo.fruits', 3));
+	}
+
+
+	public function testTranslate_helpers()
+	{
+		$this->translator->addHelper('firstUpper', function($translation) {
+			return ucfirst($translation);
+		});
+		$this->translator->addHelper('truncate', function($translation, $length) {
+			return substr($translation, 0, $length);
+		});
+
+		Assert::same('He', $this->translator->translate('first.test|truncate:2|firstUpper'));
 	}
 
 
