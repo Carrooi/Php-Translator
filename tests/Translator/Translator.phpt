@@ -245,6 +245,7 @@ class TranslatorTest extends TestCase
 	{
 		$t = $this->translator->translate('web.pages.homepage.promo.title');
 		Assert::same('Title of promo box', $t);
+		Assert::same('web.pages.homepage.promo.title', $this->translator->getLastTranslated());
 	}
 
 
@@ -252,6 +253,7 @@ class TranslatorTest extends TestCase
 	{
 		$t = $this->translator->translate(':do.not.translate.me:');
 		Assert::same('do.not.translate.me', $t);
+		Assert::same(false, $this->translator->getLastTranslated());
 	}
 
 
@@ -285,6 +287,7 @@ class TranslatorTest extends TestCase
 			'name' => 'advanced'
 		));
 		Assert::same('1 2', $t);
+		Assert::same('web.pages.homepage.promo.advanced', $this->translator->getLastTranslated());
 	}
 
 
@@ -300,6 +303,7 @@ class TranslatorTest extends TestCase
 		Assert::same('first', $this->translator->translate('web.pages.homepage.promo.newList[0]'));
 		Assert::same('second', $this->translator->translate('web.pages.homepage.promo.newList[1]'));
 		Assert::same('third', $this->translator->translate('web.pages.homepage.promo.newList[2]'));
+		Assert::same('web.pages.homepage.promo.newList', $this->translator->getLastTranslated());
 	}
 
 
