@@ -40,6 +40,9 @@ class Translator
 	/** @var array  */
 	private $untranslated = array();
 
+	/** @var string|bool */
+	private $lastTranslated = null;
+
 
 	/**
 	 * @param string|\DK\Translator\Loaders\Loader $pathOrLoader
@@ -98,6 +101,15 @@ class Translator
 	public function getUntranslated()
 	{
 		return $this->untranslated;
+	}
+
+
+	/**
+	 * @return bool|string
+	 */
+	public function getLastTranslated()
+	{
+		return $this->lastTranslated;
 	}
 
 
@@ -482,6 +494,8 @@ class Translator
 	 */
 	public function translate($message, $count = null, array $args = array())
 	{
+		$this->lastTranslated = false;
+
 		if (!is_string($message)) {
 			return $message;
 		}
@@ -539,6 +553,8 @@ class Translator
 			if (count($messageInfo['helpers']) > 0) {
 				$message = $this->applyHelpers($message, $messageInfo['helpers']);
 			}
+
+			$this->lastTranslated = $originalMessage;
 
 			if (!in_array($originalMessage, $this->translated)) {
 				$this->translated[] = $originalMessage;
