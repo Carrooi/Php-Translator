@@ -1,7 +1,7 @@
 {
     "name": "carrooi/translator",
 	"type": "library",
-	"description": "[ABANDONED] Translator for PHP",
+	"description": "Translator for PHP",
 	"keywords": ["translator", "localization", "i18n"],
 	"homepage": "https://github.com/Carrooi/Php-Translator",
 	"license": "MIT",
