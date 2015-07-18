@@ -1,12 +1,20 @@
-[![Build Status](https://travis-ci.org/sakren/php-translator.png?branch=master)](https://travis-ci.org/sakren/php-translator)
+[![Build Status](https://img.shields.io/travis/Carrooi/Php-Translator.svg?style=flat-square)](https://travis-ci.org/Carrooi/Php-Translator)
 
-[![Donate](http://b.repl.ca/v1/donate-PayPal-brightgreen.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RY2VVL44CA94Q)
+[![Donate](https://img.shields.io/badge/donate-PayPal-brightgreen.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RY2VVL44CA94Q)
 
 # translator
 
 PHP translator with plural forms support.
 
 This library is compatible with node package [translator](https://npmjs.org/package/translator).
+
+## Help
+
+Unfortunately I don't have any more time to maintain this repository :-( 
+
+Don't you want to save me and this project by taking over it?
+
+![sad cat](https://raw.githubusercontent.com/sakren/sakren.github.io/master/images/sad-kitten.jpg)
 
 ## Installation
 
@@ -415,6 +423,10 @@ If you want to use this translator with nette, please use [sakren/nette-translat
 library.
 
 ## Changelog
+
+* 1.7.1
+	+ Move under Carrooi organization
+	+ Abandon package
 
 * 1.7.0
 	+ Optimized messages parsing
